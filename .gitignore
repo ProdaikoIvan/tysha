@@ -1,0 +1,6 @@
+# Ігнорувати node_modules у будь-якій папці
+**/node_modules/
+# Інші типові речі
+**/.env
+**/dist/
+**/build/
