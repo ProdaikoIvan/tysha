@@ -1,6 +1,42 @@
-# Ігнорувати node_modules у будь-якій папці
+# Ігнорувати всі node_modules (і в client, і в server)
 **/node_modules/
-# Інші типові речі
-**/.env
+server/serviceAccountKey.json
+
+# Білди
 **/dist/
 **/build/
+
+# Лог-файли
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ОС специфічне
+.DS_Store
+Thumbs.db
+
+# Секрети та змінні оточення
+**/.env
+**/.env.*.local
+
+# IDE/редактор
+.vscode/
+.idea/
+
+# Кеші
+.cache/
+**/.next/
+**/.turbo/
+coverage/
+
+# Турбо-репозиторії (якщо використовуєш)
+out/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Бібліотеки, які компілюються
+*.tsbuildinfo
