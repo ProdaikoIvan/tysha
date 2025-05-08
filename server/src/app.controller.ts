@@ -1,6 +1,5 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
-import { FirebaseAuthGuard } from './guards/auth.guard';
 
 @Controller()
 export class AppController {
@@ -11,7 +10,6 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  //@UseGuards(FirebaseAuthGuard)
   @Get('profile')
   getProfile(@Req() req) {
     return { uid: req.user.uid, email: req.user.email };
