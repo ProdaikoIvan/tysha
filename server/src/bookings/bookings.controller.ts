@@ -6,10 +6,19 @@ import { CreateBookingDto } from './dto/create-booking.dto';
 export class BookingsController {
   constructor(private readonly service: BookingsService) {}
 
-  @Post()
+  @Post('create')
   create(@Body() dto: CreateBookingDto) {
-    console.log(dto);
-    return null; //this.service.create(dto);
+    return this.service.create(dto);
+  }
+
+  @Get('byMonth')
+  findByMonth(@Query('month') month: string, @Query('year') year: string) {
+    return this.service.findByMonth(+month, +year);
+  }
+
+  @Get('byDate')
+  findByDate() {
+    return this.service.findByDate();
   }
 
   @Get('all')

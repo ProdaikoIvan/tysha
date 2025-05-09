@@ -1,0 +1,62 @@
+@use './../../../styles/variables.scss' as *;
+@use "sass:color";
+
+.cellContainer {
+  min-height: 80px;
+  margin: 0 5px;
+  background-color: $success-bg-color;
+  border: 1px solid $succes-border-color;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: color.adjust($success-bg-color, $lightness: -3%);
+  }
+
+  &.selected {
+    background-color: color.adjust($success-bg-color, $lightness: -8%);
+    box-shadow: 0 0 5px $primary-bg-color;
+  }
+
+  &.prepairedInProgress {
+    background-color: $warning-bg-color;
+    border: 1px solid $warning-border-color;
+
+    &:hover {
+      background-color: color.adjust($warning-bg-color, $lightness: -3%);
+    }
+
+    &.selected {
+      background-color: color.adjust($warning-bg-color, $lightness: -8%);
+      box-shadow: 0 0 5px $primary-bg-color;
+    }
+  }
+
+  &.prepaired {
+    background-color: $error-bg-color;
+    border: 1px solid $error-border-color;
+    &:hover {
+      background-color: color.adjust($error-bg-color, $lightness: -3%);
+    }
+
+    &.selected {
+      background-color: color.adjust($error-bg-color, $lightness: -8%);
+      box-shadow: 0 0 5px $primary-bg-color;
+    }
+  }
+
+  /* &.start {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &.between {
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+  &.end {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  } */
+}

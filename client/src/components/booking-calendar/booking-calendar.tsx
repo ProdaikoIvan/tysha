@@ -1,50 +1,46 @@
 import { Calendar } from "antd";
-import { bookingCalendarService } from "./booking-calendar.utils";
 import React, { useState } from "react";
-import type { Dayjs } from 'dayjs';
-import { ICreateBooking } from "./booking-calendar-popup/booking-calendar-popup.type";
+import type { Dayjs } from "dayjs";
 import BookingCalendarHeader from "./booking-calendar-header/booking-calendar-header";
-import BookingCalendarPopup from "./booking-calendar-popup/booking-calendar-popup";
+import { IBooking, INewBooking } from "../../types/booking.type";
+import { SelectInfo } from "antd/es/calendar/generateCalendar";
+import BookingCalendarCell from "./booking-calendar-cell/booking-calendar-cell";
 
-const BookedCalendar: React.FC = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
-  const [selectedData, setSelectedData] = useState<ICreateBooking>({ name: '', guests: 2, prepaid: false, note:'', numbersOfDays: 1, bookedDays: 1});
-  const onPanelChange = (date: any) => {
-    console.log("onPanelChange", date);
-  };
+interface BookedCalendarProps {
+  bookings: IBooking[];
+  selectedDate: Dayjs;
+  onCalendarPanelChange: (date: Dayjs) => void;
+  onSelectedDate: (date: Dayjs) => void;
+}
 
-  const onSelect = (date: Dayjs) => {
-    setSelectedDate(date);
-    setOpen(true);
-  };
-
-  const handleOk = (data: ICreateBooking) => {
-    // Зберігаємо нові дані після редагування
-    console.log('Збережено нові дані:', data);
-  };
-
-  const handleCloseModal = () => {
-    setOpen(false);
+const BookedCalendar: React.FC<BookedCalendarProps> = ({ bookings, selectedDate, onCalendarPanelChange, onSelectedDate }) => {
+  const onSelect = (date: Dayjs, selectInfo: SelectInfo) => {
+    if (selectInfo.source !== "date") {
+      return;
+    }
+    onSelectedDate(date);
   };
 
   return (
     <>
       <Calendar
         headerRender={(props) => (
-          <BookingCalendarHeader value={props.value} onChange={props.onChange} />
+          <BookingCalendarHeader
+            value={props.value}
+            onChange={props.onChange}
+          />
         )}
-        onPanelChange={onPanelChange}
+        onPanelChange={onCalendarPanelChange}
         onSelect={onSelect}
-        cellRender={bookingCalendarService.dateCellRender}
+        fullscreen={false}
+        fullCellRender={(value) => (
+          <BookingCalendarCell
+            selectedDate={selectedDate}
+            value={value}
+            bookings={bookings}
+          ></BookingCalendarCell>
+        )}
       />
-      <BookingCalendarPopup
-        open={open}
-        data={selectedData}
-        handleOk={handleOk}
-        handleCloseModal={handleCloseModal}
-      >
-      </BookingCalendarPopup>
     </>
   );
 };

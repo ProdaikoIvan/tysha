@@ -6,7 +6,9 @@
       "moduleResolution": "node",
       "strict": true,
       "esModuleInterop": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "allowSyntheticDefaultImports": true,
+      "isolatedModules": true
     },
     "include": ["src"]
   }

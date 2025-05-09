@@ -15,14 +15,34 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
-        test: /\.scss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-        exclude: /node_modules/,
-      }
+        test: /\.module\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: false,
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+            },
+          },
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.scss$/,  // Звичайні .scss файли
+        exclude: /\.module\.scss$/,  // Не перетинається з .module.scss
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
+      },
     ],
   },
   plugins: [

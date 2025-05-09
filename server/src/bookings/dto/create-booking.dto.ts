@@ -6,4 +6,6 @@ export class CreateBookingDto {
     startDate: string = '';
     endDate: string = '';
     bookedDays: number = 1;
+    createdDate: string = '';
+    updatedDate: string = '';
 }

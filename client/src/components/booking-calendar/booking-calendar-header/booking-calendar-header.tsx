@@ -6,10 +6,15 @@ interface CalendarHeaderProps {
   onChange: (value: Dayjs) => void;
 }
 
-const BookingCalendarHeader: React.FC<CalendarHeaderProps> = ({ value, onChange }) => {
+const BookingCalendarHeader: React.FC<CalendarHeaderProps> = ({
+  value,
+  onChange,
+}) => {
   const current = value.clone();
   const localeData = value.localeData();
-  const months = Array.from({ length: 12 }, (_, i) => localeData.months(current.month(i)));
+  const months = Array.from({ length: 12 }, (_, i) =>
+    localeData.months(current.month(i))
+  );
 
   const monthOptions = months.map((name, i) => (
     <Select.Option key={i} value={i} className="month-item">
@@ -18,15 +23,18 @@ const BookingCalendarHeader: React.FC<CalendarHeaderProps> = ({ value, onChange 
   ));
 
   const year = value.year();
-  const yearOptions = Array.from({ length: 20 }, (_, i) => year - 10 + i).map((y) => (
-    <Select.Option key={y} value={y} className="year-item">
-      {y}
-    </Select.Option>
-  ));
+  const yearOptions = Array.from({ length: 20 }, (_, i) => year - 10 + i).map(
+    (y) => (
+      <Select.Option key={y} value={y} className="year-item">
+        {y}
+      </Select.Option>
+    )
+  );
 
   return (
     <div style={{ padding: 8 }}>
       <Select
+        style={{ margin: 8 }}
         size="large"
         value={year}
         onChange={(newYear) => onChange(value.clone().year(newYear))}
@@ -34,6 +42,7 @@ const BookingCalendarHeader: React.FC<CalendarHeaderProps> = ({ value, onChange 
         {yearOptions}
       </Select>
       <Select
+        style={{ margin: 8 }}
         size="large"
         value={value.month()}
         onChange={(newMonth) => onChange(value.clone().month(newMonth))}
