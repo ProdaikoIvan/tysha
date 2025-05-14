@@ -21,8 +21,9 @@ const [scrolled, setScrolled] = useState(false);
           <div className={styles["navigation-container"]}>
             <ul className={styles["navigation"]}>
               <li className={styles["navigation__item"]}><a href="#photo">фото</a></li>
+              <li className={styles["navigation__item"]}><a href="#price">ціни</a></li>
               <li className={styles["navigation__item"]}><a href="#about">про нас</a></li>
-              <li className={styles["navigation__item"]}>ціни</li>
+              <li className={styles["navigation__item"]}><a href="#location">Локація</a></li>
               <li className={styles["navigation__item"]}>контакти</li>
               <li className={styles["navigation__item"]}>
                 <Link to="/booking">Календар</Link>

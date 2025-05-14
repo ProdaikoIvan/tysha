@@ -12,7 +12,7 @@
       width: 400px;
       height: 400px;
       border-radius: 50%;
-      background-color: rgba(62, 138, 108, .7);
+      background-color: rgba(62, 138, 108, 0.7);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -33,16 +33,34 @@
     }
   }
 
-  .photo-container {
-  }
-
-  .about {
-    min-height: 200px;
+  .section {
     background: white;
-  }
+    padding: 20px 0;
+    &__container {
 
-  .price {
-    min-height: 200px;
-    background: grey;
+      padding: 0 40px;
+      margin: auto;
+      width: 100%;
+      max-width: 1280px;
+
+      &--title {
+        text-align: center;
+        text-transform: uppercase;
+        color: #323232;
+        font-size: 30px;
+        margin-bottom: 20px;
+        font-weight: 400;
+        padding-top: 70px;
+
+        &::after {
+          content: "";
+          width: 40px;
+          height: 1px;
+          display: block;
+          background: #999;
+          margin: 10px auto;
+        }
+      }
+    }
   }
 }

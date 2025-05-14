@@ -1,0 +1,21 @@
+.container {
+  min-height: 400px;
+  margin-bottom: 200px;
+  .info-container {
+    background: #323232;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    height: 400px;
+    justify-content: center;
+    &--text {
+      color: white;
+      font-size: 16px;
+      line-height: 1.5em;
+    }
+  }
+
+  .map-container {
+    height: 400px;
+  }
+}
