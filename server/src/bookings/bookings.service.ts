@@ -1,49 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import db from '../firebase';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 @Injectable()
 export class BookingsService {
   private collection = db.collection('bookings');
 
-  async create(data: CreateBookingDto) {
-    try {
-      data.startDate = dayjs(new Date(data.startDate)).format('YYYY-MM-DD');
-      data.endDate = dayjs(new Date(data.endDate)).format('YYYY-MM-DD');
-      data.createdDate = new Date().toISOString();
-      data.updatedDate = new Date().toISOString();
-      
-      await this.checkDateOverlap(data.startDate, data.endDate);
-      const res = await this.collection.add(data);
-      return { id: res.id };
-    } catch (error) {
-      // Логування помилки або надання відповіді клієнту
-      console.error('Error creating booking:', error);
-      throw new Error('Failed to create booking. Please check the input data.');
-    }
+  async getAll() {
+    const snapshot = await this.collection.where('isDeleted', '!=', true).get();
+
+    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 
-  async checkDateOverlap(startDate: string, endDate: string) {
-    const querySnapshot = await this.collection
-      .where('startDate', '<', endDate)
-      .where('endDate', '>=', startDate)
-      .get();
-
-    if (!querySnapshot.empty) {
-      throw new Error('The date range overlaps with an existing booking.');
-    }
-  }
-
-  async findByMonth(month: number, year: number) {
-    const startDate = dayjs(new Date(year, month - 1, 1))
-      .startOf('month')
+  async getByDateRange(from: string, to: string) {
+    const startDate = dayjs(from)
       .toISOString();
-    const endDate = dayjs(new Date(year, month - 1, 1))
-      .endOf('month')
+    const endDate = dayjs(to)
       .toISOString();
 
     const snapshot = await this.collection
+      .where('isDeleted', '!=', true)
       .where('startDate', '<=', endDate)
       .where('endDate', '>=', startDate)
       .get();
@@ -51,11 +32,82 @@ export class BookingsService {
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 
-  async findByDate() {}
+  async create(data: CreateBookingDto) {
+    try {
+      data.startDate = dayjs(new Date(data.startDate)).format('YYYY-MM-DD');
+      data.endDate = dayjs(new Date(data.endDate)).format('YYYY-MM-DD');
+      data.createdDate = new Date().toISOString();
+      data.updatedDate = new Date().toISOString();
+      data.isDeleted = false;
 
-  async getAll() {
-    const snapshot = await this.collection.get();
+      await this.checkDateOverlap(data.startDate, data.endDate);
+      const res = await this.collection.add(data);
+      return { id: res.id };
+    } catch (error) {
+      // Логування помилки або надання відповіді клієнту
+      console.error('Error creating booking:', error);
+      throw new BadRequestException('Дата вже зайнята або дані некоректні');
+    }
+  }
 
-    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  async update(id: string, data: CreateBookingDto) {
+    try {
+      data.startDate = dayjs(new Date(data.startDate)).format('YYYY-MM-DD');
+      data.endDate = dayjs(new Date(data.endDate)).format('YYYY-MM-DD');
+      data.updatedDate = new Date().toISOString();
+      if (data.isDeleted === undefined) {
+        data.isDeleted = false;
+      }
+      await this.checkDateOverlap(data.startDate, data.endDate, id);
+      const docRef = this.collection.doc(id);
+      const res = await docRef.get();
+      if (!res.exists) {
+        throw new BadRequestException(`Документ з id ${id} не знайдено`);
+      }
+      await docRef.set(data, { merge: true });
+      return { id: res.id };
+    } catch (error) {
+      // Логування помилки або надання відповіді клієнту
+      console.error('Error creating booking:', error);
+
+      // Якщо це вже Exception — перекидаємо його далі
+      throw new BadRequestException('Дата вже зайнята або дані некоректні');
+    }
+  }
+
+  async delete(id: string) {
+    try {
+      const docRef = this.collection.doc(id);
+      const doc = await docRef.get();
+      if (!doc.exists) {
+        throw new NotFoundException('Бронювання не знайдено');
+      }
+      await docRef.update({ isDeleted: true });
+      return { message: 'Бронювання видалене' };
+    } catch (error) {
+      // Логування помилки або надання відповіді клієнту
+      console.error('Error creating booking:', error);
+      throw new BadRequestException('Бронювання не знайдено');
+    }
+  }
+
+  async checkDateOverlap(
+    startDate: string,
+    endDate: string,
+    currentIdToExclude?: string,
+  ) {
+    const querySnapshot = await this.collection
+      .where('isDeleted', '!=', true)
+      .where('startDate', '<', endDate)
+      .where('endDate', '>', startDate)
+      .get();
+
+    const conflicting = querySnapshot.docs.filter(
+      (doc) => doc.id !== currentIdToExclude,
+    );
+
+    if (conflicting.length > 0) {
+      throw new Error('The date range overlaps with an existing booking.');
+    }
   }
 }

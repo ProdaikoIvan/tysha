@@ -1,12 +1,11 @@
 export interface IBooking extends INewBooking{
     id: string;
-    month: number;
-    year: number;
     startDate: Date;
     endDate: Date; 
 }
 
 export interface INewBooking {
+    id?: string;
     name: string;
     guests: number;
     note?: string;

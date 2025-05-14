@@ -15,32 +15,40 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
       {
         test: /\.module\.scss$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               esModule: false,
               modules: {
-                localIdentName: '[name]__[local]__[hash:base64:5]',
+                localIdentName: "[name]__[local]__[hash:base64:5]",
+                exportLocalsConvention: "asIs"
               },
             },
           },
-          'sass-loader',
+          "sass-loader",
         ],
       },
       {
-        test: /\.scss$/,  // Звичайні .scss файли
-        exclude: /\.module\.scss$/,  // Не перетинається з .module.scss
+        test: /\.scss$/, // Звичайні .scss файли
+        exclude: /\.module\.scss$/, // Не перетинається з .module.scss
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.css$/, // додаємо правило для CSS
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
+          "style-loader",  // додає CSS в стилі HTML
+          "css-loader",    // інтерпретує CSS файли
         ],
       },
     ],
@@ -55,6 +63,7 @@ module.exports = {
     port: 3000,
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   mode: "development",
 };

@@ -1,4 +1,5 @@
 export class CreateBookingDto {
+    id?: string;
     name: string = '';
     guests: number = 0;
     note?: string;
@@ -8,4 +9,5 @@ export class CreateBookingDto {
     bookedDays: number = 1;
     createdDate: string = '';
     updatedDate: string = '';
+    isDeleted?: boolean = false;
 }
