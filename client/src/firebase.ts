@@ -20,28 +20,3 @@ const firebaseConfig = {
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-console.log("Firebase initialized")
-const analytics = getAnalytics(app);
-
-const getToken = async () => {
-  try {
-    // Перевіряємо чи користувач увійшов
-    const user = auth.currentUser;
-    console.log(user);
-    if (!user) {
-      console.error("Користувач не автентифікований");
-      return;
-    }
-
-    // Отримуємо ID токен
-    const token = await user.getIdToken();
-    console.log("ID Token:", token); // Токен, який потрібно відправляти у запитах
-
-    return token;
-  } catch (error) {
-    console.error("Помилка при отриманні токена:", error);
-  }
-};
-
-// Приклад використання
-getToken();

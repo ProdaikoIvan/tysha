@@ -2,14 +2,19 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateBookingDto } from './dto/create-booking.dto';
-import db from '../firebase';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import { FirebaseService } from 'src/firebase/firebase.service';
 
 @Injectable()
 export class BookingsService {
-  private collection = db.collection('bookings');
+  private collection;
+  constructor(private readonly firebaseService: FirebaseService) {
+    const db = this.firebaseService.getDb();
+    this.collection = db.collection('bookings');
+  }
 
   async getAll() {
     const snapshot = await this.collection.where('isDeleted', '!=', true).get();
@@ -18,10 +23,8 @@ export class BookingsService {
   }
 
   async getByDateRange(from: string, to: string) {
-    const startDate = dayjs(from)
-      .toISOString();
-    const endDate = dayjs(to)
-      .toISOString();
+    const startDate = dayjs(from).toISOString();
+    const endDate = dayjs(to).toISOString();
 
     const snapshot = await this.collection
       .where('isDeleted', '!=', true)
@@ -31,7 +34,7 @@ export class BookingsService {
 
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
-
+  
   async create(data: CreateBookingDto) {
     try {
       data.startDate = dayjs(new Date(data.startDate)).format('YYYY-MM-DD');
