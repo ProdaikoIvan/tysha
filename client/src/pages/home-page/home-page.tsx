@@ -4,6 +4,7 @@ import Header from "./../../components/header/header";
 import LocationComponent from "../../components/location/location";
 import AboutComponent from "../../components/about/about";
 import PriceComponent from "../../components/price/price";
+import ContactComponent from "../../components/contact/contact";
 
 const HomePage: React.FC = () => {
   return (
@@ -38,6 +39,12 @@ const HomePage: React.FC = () => {
         <div className={styles["section__container"]}>
           <h3 className={styles["section__container--title"]}>Локація</h3>
           <LocationComponent></LocationComponent>
+        </div>
+      </section>
+      <section id="contact" className={styles["section"]}>
+        <div className={styles["section__container"]}>
+          <h3 className={styles["section__container--title"]}>Контакт</h3>
+          <ContactComponent></ContactComponent>
         </div>
       </section>
     </div>
