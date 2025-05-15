@@ -1,14 +1,15 @@
 import { Dayjs } from "dayjs";
-import { IBooking, INewBooking } from "../types/booking.type";
-import axiosInstance from "./api.service";
+import { IBooking, IBookingDpo } from "../../types/booking.type";
+import axiosInstance from "../api.service";
+import { BookingCalendarAdaptor } from "./booking-calendar.adapter";
 
-export const BookingCalendarAPIService = {
+export const BookingCalendarAPI = {
   async getBookingsByDateRange(
     from: Dayjs,
     to: Dayjs
   ): Promise<IBooking[] | null> {
     try {
-      const response = await axiosInstance.get<IBooking[]>(
+      const response = await axiosInstance.get<IBookingDpo[]>(
         "/bookings/byMonth",
         {
           params: {
@@ -19,7 +20,7 @@ export const BookingCalendarAPIService = {
       );
 
       if (response.data) {
-        return response.data;
+        return BookingCalendarAdaptor.transformListFromDPO(response.data);
       } else {
         console.error("Failed to fetch data");
         return null;
@@ -29,11 +30,11 @@ export const BookingCalendarAPIService = {
       return null;
     }
   },
-  async createBooking(data: INewBooking): Promise<INewBooking | null> {
+  async createBooking(data: IBooking): Promise<IBooking | null> {
     try {
-      const response = await axiosInstance.post<INewBooking>(
+      const response = await axiosInstance.post<IBooking>(
         "/bookings",
-        data
+        BookingCalendarAdaptor.transformToDPO(data)
       );
 
       if (response.data) {
@@ -48,11 +49,11 @@ export const BookingCalendarAPIService = {
     }
   },
   
-  async updateBooking(id: string, data: INewBooking): Promise<INewBooking | null> {
+  async updateBooking(id: string, data: IBooking): Promise<IBooking | null> {
     try {
-      const response = await axiosInstance.put<INewBooking>(
+      const response = await axiosInstance.put<IBooking>(
         `/bookings/${id}`,
-        data
+        BookingCalendarAdaptor.transformToDPO(data)
       );
 
       if (response.data) {
@@ -66,9 +67,10 @@ export const BookingCalendarAPIService = {
       return null;
     }
   },
-  async deleteBooking(id: string): Promise<INewBooking | null> {
+  
+  async deleteBooking(id: string): Promise<IBooking | null> {
     try {
-      const response = await axiosInstance.delete<INewBooking>(
+      const response = await axiosInstance.delete<IBooking>(
         `/bookings/${id}`);
 
       if (response.data) {

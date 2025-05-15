@@ -2,21 +2,21 @@ import type { Dayjs } from "dayjs";
 import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isBetween from "dayjs/plugin/isBetween";
-import { IBooking, INewBooking } from "../types/booking.type";
-import { BookedDayType, IBookingData } from "../types/booking-calendar.type";
+import { IBookingData, BookedDayType } from "../../types/booking-calendar.type";
+import { IBooking, IBookingDpo } from "../../types/booking.type";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isBetween);
 
-export const BookingCalendarService = {
+export const BookingCalendarUtils = {
   getCellData(date: Dayjs, bookings: IBooking[]): IBookingData | null {
-    const bookedData = BookingCalendarService.getBookedData(date, bookings);
+    const bookedData = BookingCalendarUtils.getBookedData(date, bookings);
 
     if (!bookedData) {
       return null;
     }
 
-    const bookedDayType = BookingCalendarService.getBookedDayType(
+    const bookedDayType = BookingCalendarUtils.getBookedDayType(
       date,
       bookedData
     );
@@ -60,13 +60,15 @@ export const BookingCalendarService = {
     return BookedDayType.singl;
   },
 
-  getInitialBookingData(): INewBooking {
+  getInitialBookingData(date: Dayjs): IBooking {
     return {
       name: "",
       guests: 2,
       prepaid: false,
       note: "",
-      bookedDays: 1
+      bookedDays: 1,
+      startDate: dayjs(date),
+      endDate: dayjs(date).add(1, 'day'),
     };
   }
 };

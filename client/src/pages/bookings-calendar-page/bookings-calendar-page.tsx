@@ -1,34 +1,32 @@
 import { useEffect, useState } from "react";
 import "dayjs/locale/uk";
 import BookedCalendar from "../../components/booking-calendar/booking-calendar";
-import { IBooking, INewBooking } from "../../types/booking.type";
+import { IBooking } from "../../types/booking.type";
 import { Col, Row } from "antd";
 import BookingInfo from "../../components/booking-info/booking-info";
 import dayjs, { Dayjs } from "dayjs";
 import { Typography } from "antd";
-import { BookingCalendarAPIService } from "../../services/booking-calendar-api.service";
-import { BookingCalendarService } from "../../services/booking-calendar.utils";
+import { BookingCalendarAPI } from "../../services/booking-calendar/booking-calendar.api";
+import { BookingCalendarUtils } from "../../services/booking-calendar/booking-calendar.utils";
 
 const BookingsCalendarPage: React.FC = () => {
   const [bookings, setBookings] = useState<IBooking[]>([]);
   const [selectedDate, setSelectedDate] = useState<Dayjs>(dayjs());
-  const [selectedBookedData, setSelectedBooketData] = useState<INewBooking>(
-    BookingCalendarService.getInitialBookingData()
-  );
+  const [selectedBookedData, setSelectedBooketData] = useState<IBooking>();
 
-  const onSaveBooking = async (data: INewBooking) => {
+  const onSaveBooking = async (data: IBooking) => {
     const responce = data.id
-      ? await BookingCalendarAPIService.updateBooking(data.id, data)
-      : await BookingCalendarAPIService.createBooking(data);
-    
+      ? await BookingCalendarAPI.updateBooking(data.id, data)
+      : await BookingCalendarAPI.createBooking(data);
+
     if (responce) {
       loadData();
     }
   };
 
   const onDeleteBooking = async (id: string) => {
-    const responce = await BookingCalendarAPIService.deleteBooking(id)
-    
+    const responce = await BookingCalendarAPI.deleteBooking(id);
+
     if (responce) {
       loadData();
     }
@@ -43,9 +41,9 @@ const BookingsCalendarPage: React.FC = () => {
   };
 
   const loadData = async () => {
-    const from = selectedDate.subtract(1, 'month').startOf('month');
-    const to = selectedDate.add(1, 'month').endOf('month');
-    const responce = await BookingCalendarAPIService.getBookingsByDateRange(
+    const from = selectedDate.subtract(1, "month").startOf("month");
+    const to = selectedDate.add(1, "month").endOf("month");
+    const responce = await BookingCalendarAPI.getBookingsByDateRange(
       from,
       to
     );
@@ -55,13 +53,13 @@ const BookingsCalendarPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const bookingData = BookingCalendarService.getBookedData(
+    const bookingData = BookingCalendarUtils.getBookedData(
       selectedDate,
       bookings
     );
     const bookedData = bookingData
       ? bookingData
-      : BookingCalendarService.getInitialBookingData();
+      : BookingCalendarUtils.getInitialBookingData(selectedDate);
     setSelectedBooketData(bookedData);
   }, [selectedDate, bookings]);
 
@@ -84,12 +82,15 @@ const BookingsCalendarPage: React.FC = () => {
           <Typography.Title level={4} style={{ textAlign: "center" }}>
             {selectedDate?.format("D MMMM YYYY")}
           </Typography.Title>
-          <BookingInfo
-            data={selectedBookedData}
-            selectedDate={selectedDate}
-            onSaveBooking={onSaveBooking}
-            onDeleteBooking={onDeleteBooking}
-          ></BookingInfo>
+
+          {selectedBookedData && (
+            <BookingInfo
+              data={selectedBookedData}
+              selectedDate={selectedDate}
+              onSaveBooking={onSaveBooking}
+              onDeleteBooking={onDeleteBooking}
+            ></BookingInfo>
+          )}
         </Col>
       </Row>
     </>

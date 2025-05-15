@@ -2,8 +2,9 @@ import { Dayjs } from "dayjs";
 import { IBooking } from "../../../types/booking.type";
 import { useEffect, useState } from "react";
 import { BookedDayType, IBookingData } from "../../../types/booking-calendar.type";
+import { BookingCalendarAPI } from "../../../services/booking-calendar/booking-calendar.api";
+import { BookingCalendarUtils } from "../../../services/booking-calendar/booking-calendar.utils";
 import { CalendarStyleService } from "./booking-calendar-style.service";
-import { BookingCalendarService } from "../../../services/booking-calendar.utils";
 
 interface BookingCalendarCellProps {
   value: Dayjs;
@@ -19,7 +20,7 @@ const BookingCalendarCell: React.FC<BookingCalendarCellProps> = ({
   const [cellData, setCellData] = useState<IBookingData | null>(null);
 
   useEffect(() => {
-    const cellData = BookingCalendarService.getCellData(value, bookings);
+    const cellData = BookingCalendarUtils.getCellData(value, bookings);
     
     setCellData(cellData);
   }, [value, bookings]);

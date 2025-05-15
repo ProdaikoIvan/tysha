@@ -2,7 +2,7 @@ import { Calendar } from "antd";
 import React, { useState } from "react";
 import type { Dayjs } from "dayjs";
 import BookingCalendarHeader from "./booking-calendar-header/booking-calendar-header";
-import { IBooking, INewBooking } from "../../types/booking.type";
+import { IBooking } from "../../types/booking.type";
 import { SelectInfo } from "antd/es/calendar/generateCalendar";
 import BookingCalendarCell from "./booking-calendar-cell/booking-calendar-cell";
 

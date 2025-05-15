@@ -1,16 +1,23 @@
-export interface IBooking extends INewBooking{
-    id: string;
-    startDate: Date;
-    endDate: Date; 
-}
+import { Dayjs } from "dayjs";
 
-export interface INewBooking {
+export interface IBooking {
     id?: string;
     name: string;
     guests: number;
-    note?: string;
+    note: string;
     prepaid: boolean;
-    startDate?: Date;
-    endDate?: Date; 
+    startDate: Dayjs;
+    endDate: Dayjs; 
+    bookedDays: number;
+}
+
+export interface IBookingDpo {
+    id?: string;
+    name: string;
+    guests: number;
+    note: string;
+    prepaid: boolean;
+    startDate: string;
+    endDate: string; 
     bookedDays: number;
 }

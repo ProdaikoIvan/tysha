@@ -9,14 +9,14 @@ import {
   Space,
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { INewBooking } from "../../types/booking.type";
+import { IBooking } from "../../types/booking.type";
 import { useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
 
 interface BookingInfoProps {
-  data: INewBooking;
+  data: IBooking;
   selectedDate: Dayjs;
-  onSaveBooking: (data: INewBooking) => void;
+  onSaveBooking: (data: IBooking) => void;
   onDeleteBooking: (id: string) => void;
 }
 
@@ -26,7 +26,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({
   onSaveBooking,
   onDeleteBooking: onCancelationBooking,
 }) => {
-  const [form] = Form.useForm<INewBooking>();
+  const [form] = Form.useForm<IBooking>();
 
   const onChangeBookedDays = (value: number | null): void => {
     if (value) {
