@@ -1,6 +1,6 @@
 import { Col, Row } from "antd";
 import styles from "./about.module.scss";
-import PH5 from "../../assets/img/gallery/Ph-5.jpg"
+import PH5 from "../../assets/img/gallery/Ph-5.webp"
 
 const AboutComponent: React.FC = () => {
 

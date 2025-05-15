@@ -14,7 +14,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 module.exports = {
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
     filename: "bundle.js",
     clean: true,
   },
@@ -51,7 +51,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
         type: 'asset/resource',
       },
       {
