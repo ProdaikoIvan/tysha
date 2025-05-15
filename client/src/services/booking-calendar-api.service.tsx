@@ -12,8 +12,8 @@ export const BookingCalendarAPIService = {
         "/bookings/byMonth",
         {
           params: {
-            from: from.toISOString(),
-            to: to.toISOString(),
+            from: from.format('YYYY-MM-DD'),
+            to: to.format('YYYY-MM-DD'),
           },
         }
       );

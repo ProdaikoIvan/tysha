@@ -45,7 +45,6 @@ const BookingsCalendarPage: React.FC = () => {
   const loadData = async () => {
     const from = selectedDate.subtract(1, 'month').startOf('month');
     const to = selectedDate.add(1, 'month').endOf('month');
-    
     const responce = await BookingCalendarAPIService.getBookingsByDateRange(
       from,
       to
