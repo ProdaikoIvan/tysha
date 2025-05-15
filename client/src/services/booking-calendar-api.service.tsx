@@ -9,7 +9,7 @@ export const BookingCalendarAPIService = {
   ): Promise<IBooking[] | null> {
     try {
       const response = await axiosInstance.get<IBooking[]>(
-        "http://localhost:3001/bookings/byMonth",
+        "/bookings/byMonth",
         {
           params: {
             from: from.toISOString(),
@@ -32,7 +32,7 @@ export const BookingCalendarAPIService = {
   async createBooking(data: INewBooking): Promise<INewBooking | null> {
     try {
       const response = await axiosInstance.post<INewBooking>(
-        "http://localhost:3001/bookings",
+        "/bookings",
         data
       );
 
@@ -51,7 +51,7 @@ export const BookingCalendarAPIService = {
   async updateBooking(id: string, data: INewBooking): Promise<INewBooking | null> {
     try {
       const response = await axiosInstance.put<INewBooking>(
-        `http://localhost:3001/bookings/${id}`,
+        `/bookings/${id}`,
         data
       );
 
@@ -69,7 +69,7 @@ export const BookingCalendarAPIService = {
   async deleteBooking(id: string): Promise<INewBooking | null> {
     try {
       const response = await axiosInstance.delete<INewBooking>(
-        `http://localhost:3001/bookings/${id}`);
+        `/bookings/${id}`);
 
       if (response.data) {
         return response.data;
