@@ -1,8 +1,9 @@
 // src/api/axiosInstance.ts
+const API_URL = process.env.REACT_APP_API_URL;
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3001', // твій бекенд
+  baseURL: API_URL, // твій бекенд
   withCredentials: false,
 });
 

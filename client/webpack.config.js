@@ -3,7 +3,8 @@ const dotenv = require('dotenv');
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const env = dotenv.config().parsed;
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
+const env = dotenv.config({ path: envFile }).parsed || {};
 
 // Створюємо обʼєкт із змінними
 const envKeys = Object.keys(env).reduce((prev, next) => {
@@ -70,7 +71,7 @@ module.exports = {
     new webpack.DefinePlugin(envKeys),
   ],
   devServer: {
-    static: "./dist",
+    static: "./build",
     port: 3000,
     hot: true,
     open: true,
