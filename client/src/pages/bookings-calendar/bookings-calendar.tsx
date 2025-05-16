@@ -65,7 +65,7 @@ const BookingsCalendarPage: React.FC = () => {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [selectedDate]);
 
   return (
     <>

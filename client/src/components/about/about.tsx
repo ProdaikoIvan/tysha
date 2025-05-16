@@ -1,14 +1,14 @@
 import { Col, Row } from "antd";
 import styles from "./about.module.scss";
-import PH5 from "../../assets/img/gallery/Ph-5.webp"
+import CardComponent from "../card/card";
 
 const AboutComponent: React.FC = () => {
 
   return (
     <div>
-      <Row className={styles["container"]}>
-        <Col className={styles["image-container"]} xs={24} lg={12}>
-          <img className={styles["image-container--img"]} src={PH5} alt="img" />
+      <Row gutter={16} className={styles["container"]}>
+        <Col xs={24} lg={12}>
+          <CardComponent></CardComponent>
         </Col>
         <Col className={styles["info-container"]} xs={24} lg={12}>
           <p className={styles["info-container--text"]}>

@@ -1,0 +1,12 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Кружечок світло-зеленого кольору -->
+  <circle cx="50" cy="50" r="48" fill="#C7EFCF" />
+
+  <!-- Стовбур сосни -->
+  <rect x="46" y="60" width="8" height="30" fill="#6B4F2B" rx="1" ry="1" />
+
+  <!-- Листя сосни (трикутники) -->
+  <polygon points="50,10 25,60 75,60" fill="#2F7A2E" />
+  <polygon points="50,30 30,55 70,55" fill="#3B8A33" />
+  <polygon points="50,45 40,50 60,50" fill="#4BA13B" />
+</svg>
