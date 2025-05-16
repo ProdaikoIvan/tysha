@@ -24,7 +24,6 @@ const LayoutComponent: React.FC = () => {
 
   const onClick = (e: any) => {
     navigate(e.key);
-    console.log(e);
   };
 
   return (

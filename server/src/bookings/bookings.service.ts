@@ -2,11 +2,13 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
-  UseGuards,
 } from '@nestjs/common';
-import { CreateBookingDto } from './dto/create-booking.dto';
+import { CreateBookingDto, IBookedDay } from './dto/create-booking.dto';
 import dayjs from 'dayjs';
 import { FirebaseService } from 'src/firebase/firebase.service';
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import { expandBookingPeriodToDays } from './utils/date-utils';
+dayjs.extend(isSameOrBefore)
 
 @Injectable()
 export class BookingsService {
@@ -22,6 +24,33 @@ export class BookingsService {
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 
+  async getBookingList(from: string, to: string) {
+    const startDate = dayjs(from).isAfter(dayjs(), 'day')
+      ? dayjs().format('YYYY-MM-DD')
+      : dayjs(from).toISOString();
+    const endDate = dayjs(to).toISOString();
+
+    const snapshot = await this.collection
+      .where('isDeleted', '!=', true)
+      .where('startDate', '<=', endDate)
+      .where('endDate', '>=', startDate)
+      .get();
+
+    
+    const bookedDays: IBookedDay[] = [];
+
+    snapshot.forEach((doc) => {
+      const data = doc.data();
+      const startDate = dayjs(data.startDate);
+      const endDate = dayjs(data.endDate).subtract(1, 'day');
+      const prepaid = data.prepaid || false;
+      const days = expandBookingPeriodToDays(startDate, endDate, prepaid);
+      bookedDays.push(...days);
+    });
+
+    return bookedDays;
+  }
+
   async getByDateRange(from: string, to: string) {
     const startDate = dayjs(from).toISOString();
     const endDate = dayjs(to).toISOString();
@@ -34,7 +63,7 @@ export class BookingsService {
 
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
-  
+
   async create(data: CreateBookingDto) {
     try {
       data.startDate = dayjs(new Date(data.startDate)).format('YYYY-MM-DD');
@@ -112,5 +141,21 @@ export class BookingsService {
     if (conflicting.length > 0) {
       throw new Error('The date range overlaps with an existing booking.');
     }
+  }
+
+  private expandBookingToDays(startDate: string, endDate: string, prepaid: boolean): IBookedDay[] {
+    const result: IBookedDay[] = [];
+    let currentDate = dayjs(startDate).startOf('day');
+    const lastDate = dayjs(endDate).subtract(1, 'day').startOf('day');
+
+    while (currentDate.isSameOrBefore(lastDate)) {
+      result.push({
+        prepaid,
+        date: currentDate.format('YYYY-MM-DD'),
+      });
+      currentDate = currentDate.add(1, 'day');
+    }
+
+    return result;
   }
 }

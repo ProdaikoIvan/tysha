@@ -5,8 +5,27 @@ import LocationComponent from "../../components/location/location";
 import AboutComponent from "../../components/about/about";
 import PriceComponent from "../../components/price/price";
 import ContactComponent from "../../components/contact/contact";
+import { useEffect, useState } from "react";
+import { BookingCalendarAPI } from "../../services/booking-calendar/booking-calendar.api";
+import dayjs from "dayjs";
+import { IBookedDay } from "../../types/booking.type";
 
 const HomePage: React.FC = () => {
+  const [bookedDays, setBookedDays] = useState<IBookedDay[]>([]);
+
+  const loadBookedDates = async () => {
+    const from = dayjs(new Date()).subtract(1, "month").startOf("month");
+    const to = dayjs(new Date()).add(1, "month").endOf("month");
+    const dates = await BookingCalendarAPI.getBookedDays(from, to);
+
+    if (dates) {
+      setBookedDays(dates);
+    }
+  };
+
+  useEffect(() => {
+    loadBookedDates();
+  }, []);
   return (
     <div className={styles["container"]}>
       <Header></Header>
@@ -22,11 +41,11 @@ const HomePage: React.FC = () => {
           <PhotoGallery></PhotoGallery>
         </div>
       </section>
-      
+
       <section id="price" className={styles["section"]}>
         <div className={styles["section__container"]}>
           <h3 className={styles["section__container--title"]}>Ціни</h3>
-          <PriceComponent></PriceComponent>
+          <PriceComponent bookedDays={bookedDays}></PriceComponent>
         </div>
       </section>
       <section id="about" className={styles["section"]}>

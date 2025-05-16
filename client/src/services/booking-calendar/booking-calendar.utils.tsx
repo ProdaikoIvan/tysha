@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isBetween from "dayjs/plugin/isBetween";
 import { IBookingData, BookedDayType } from "../../types/booking-calendar.type";
-import { IBooking, IBookingDpo } from "../../types/booking.type";
+import { IBooking } from "../../types/booking.type";
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isBetween);

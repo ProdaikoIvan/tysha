@@ -6,7 +6,7 @@ import { Col, Row } from "antd";
 import BookingInfo from "../../components/booking-info/booking-info";
 import dayjs, { Dayjs } from "dayjs";
 import { Typography } from "antd";
-import { BookingCalendarAPI } from "../../services/booking-calendar/booking-calendar.api";
+import { BookingCalendarAdminAPI } from "../../services/booking-calendar/booking-calendar-admin.api";
 import { BookingCalendarUtils } from "../../services/booking-calendar/booking-calendar.utils";
 
 const BookingsCalendarPage: React.FC = () => {
@@ -16,8 +16,8 @@ const BookingsCalendarPage: React.FC = () => {
 
   const onSaveBooking = async (data: IBooking) => {
     const responce = data.id
-      ? await BookingCalendarAPI.updateBooking(data.id, data)
-      : await BookingCalendarAPI.createBooking(data);
+      ? await BookingCalendarAdminAPI.updateBooking(data.id, data)
+      : await BookingCalendarAdminAPI.createBooking(data);
 
     if (responce) {
       loadData();
@@ -25,7 +25,7 @@ const BookingsCalendarPage: React.FC = () => {
   };
 
   const onDeleteBooking = async (id: string) => {
-    const responce = await BookingCalendarAPI.deleteBooking(id);
+    const responce = await BookingCalendarAdminAPI.deleteBooking(id);
 
     if (responce) {
       loadData();
@@ -43,7 +43,7 @@ const BookingsCalendarPage: React.FC = () => {
   const loadData = async () => {
     const from = selectedDate.subtract(1, "month").startOf("month");
     const to = selectedDate.add(1, "month").endOf("month");
-    const responce = await BookingCalendarAPI.getBookingsByDateRange(
+    const responce = await BookingCalendarAdminAPI.getBookingsByDateRange(
       from,
       to
     );

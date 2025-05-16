@@ -17,6 +17,11 @@ import { FirebaseAuthGuard } from 'src/auth/firebase-auth.guard';
 export class BookingsController {
   constructor(private readonly service: BookingsService) {}
 
+  @Get('list')
+  findBookingList(@Query('from') from: string, @Query('to') to: string) {
+    return this.service.getBookingList(from, to);
+  }
+
   @UseGuards(FirebaseAuthGuard)
   @Put(':id')
   async updateBooking(

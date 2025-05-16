@@ -21,3 +21,8 @@ export interface IBookingDpo {
     endDate: string; 
     bookedDays: number;
 }
+
+export interface IBookedDay {
+    prepaid: boolean;
+    date: Date;
+}

@@ -12,7 +12,7 @@ export class FirebaseAuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest<Request>();
     const authHeader = req.headers.authorization;
-    console.log('authorization', authHeader)
+
     if (!authHeader?.startsWith('Bearer ')) {
       throw new UnauthorizedException('No token provided');
     }

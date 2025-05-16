@@ -11,3 +11,8 @@ export class CreateBookingDto {
     updatedDate: string = '';
     isDeleted?: boolean = false;
 }
+
+export interface IBookedDay {
+  prepaid: boolean;
+  date: string;
+}
