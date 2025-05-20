@@ -1,5 +1,5 @@
 import { Calendar } from "antd";
-import React, { useState } from "react";
+import React from "react";
 import type { Dayjs } from "dayjs";
 import BookingCalendarHeader from "./booking-calendar-header/booking-calendar-header";
 import { IBooking } from "../../types/booking.type";
@@ -13,7 +13,12 @@ interface BookedCalendarProps {
   onSelectedDate: (date: Dayjs) => void;
 }
 
-const BookedCalendar: React.FC<BookedCalendarProps> = ({ bookings, selectedDate, onCalendarPanelChange, onSelectedDate }) => {
+const BookedCalendar: React.FC<BookedCalendarProps> = ({
+  bookings,
+  selectedDate,
+  onCalendarPanelChange,
+  onSelectedDate,
+}) => {
   const onSelect = (date: Dayjs, selectInfo: SelectInfo) => {
     if (selectInfo.source !== "date") {
       return;
@@ -26,6 +31,7 @@ const BookedCalendar: React.FC<BookedCalendarProps> = ({ bookings, selectedDate,
       <Calendar
         headerRender={(props) => (
           <BookingCalendarHeader
+            selectedDate={selectedDate}
             value={props.value}
             onChange={props.onChange}
           />

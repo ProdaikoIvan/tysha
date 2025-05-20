@@ -27,14 +27,7 @@ const BookingCalendarCell: React.FC<BookingCalendarCellProps> = ({
   return (
     <div className={CalendarStyleService.getCellClassNames(cellData, value, selectedDate)}>
       <div>{value.date()}</div>
-      <div className="content">
-        {cellData && ((cellData.bookedDayType === BookedDayType.singl || cellData.bookedDayType === BookedDayType.start)  && (
-          <>
-            <p>{cellData.bookedData.name}</p>
-            <p>{cellData.bookedData.guests}</p>
-          </>
-        ))}
-      </div>
+      
     </div>
   );
 };

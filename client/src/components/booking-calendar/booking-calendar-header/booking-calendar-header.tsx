@@ -1,12 +1,15 @@
-import { Select } from "antd";
+import { Select, Typography } from "antd";
 import { Dayjs } from "dayjs";
+import styles from './booking-calendar-header.module.scss';
 
 interface CalendarHeaderProps {
+  selectedDate: Dayjs;
   value: Dayjs;
   onChange: (value: Dayjs) => void;
 }
 
 const BookingCalendarHeader: React.FC<CalendarHeaderProps> = ({
+  selectedDate,
   value,
   onChange,
 }) => {
@@ -32,23 +35,28 @@ const BookingCalendarHeader: React.FC<CalendarHeaderProps> = ({
   );
 
   return (
-    <div style={{ padding: 8 }}>
-      <Select
-        style={{ margin: 8 }}
-        size="large"
-        value={year}
-        onChange={(newYear) => onChange(value.clone().year(newYear))}
-      >
-        {yearOptions}
-      </Select>
-      <Select
-        style={{ margin: 8 }}
-        size="large"
-        value={value.month()}
-        onChange={(newMonth) => onChange(value.clone().month(newMonth))}
-      >
-        {monthOptions}
-      </Select>
+    <div className={styles['calendar-header']}>
+      <div className={styles['calendar-header--selected-date']}>
+        {selectedDate?.format("D MMMM YYYY")}
+      </div>
+      <div>
+        <Select
+          style={{ margin: 8 }}
+          size="small"
+          value={year}
+          onChange={(newYear) => onChange(value.clone().year(newYear))}
+        >
+          {yearOptions}
+        </Select>
+        <Select
+          style={{ margin: 8 }}
+          size="small"
+          value={value.month()}
+          onChange={(newMonth) => onChange(value.clone().month(newMonth))}
+        >
+          {monthOptions}
+        </Select>
+      </div>
     </div>
   );
 };

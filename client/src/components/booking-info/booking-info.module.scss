@@ -1,0 +1,12 @@
+.multi-control-container {
+    display: flex;
+    justify-content: start;
+
+    &--item {
+        margin-right: 10px;
+    }
+}
+
+.date-multi-control {
+    min-width: 180px;
+}

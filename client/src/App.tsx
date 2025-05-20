@@ -10,7 +10,6 @@ import HomePage from "./pages/home-page/home-page";
 import { useEffect } from "react";
 import AuthService from "./services/auth.service";
 import ProtectedRoute from "./components/protected-route";
-import LayoutComponent from "./components/layout/layout";
 import BookingsCalendarPage from "./pages/bookings-calendar/bookings-calendar";
 
 dayjs.extend(localeData);
@@ -28,15 +27,14 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/admin"
+          <Route
+            path="/admin"
             element={
               <ProtectedRoute>
-                <LayoutComponent />
+                <BookingsCalendarPage />
               </ProtectedRoute>
             }
-          >
-            <Route path="bookings" element={<BookingsCalendarPage />} />
-          </Route>
+          ></Route>
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

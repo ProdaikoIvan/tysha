@@ -69,7 +69,7 @@ const BookingsCalendarPage: React.FC = () => {
 
   return (
     <>
-      <Row style={{ padding: 16 }}>
+      <Row gutter={16}>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
           <BookedCalendar
             onCalendarPanelChange={onCalendarPanelChange}
@@ -79,10 +79,6 @@ const BookingsCalendarPage: React.FC = () => {
           ></BookedCalendar>
         </Col>
         <Col xs={24} sm={24} md={24} lg={24} xl={12}>
-          <Typography.Title level={4} style={{ textAlign: "center" }}>
-            {selectedDate?.format("D MMMM YYYY")}
-          </Typography.Title>
-
           {selectedBookedData && (
             <BookingInfo
               data={selectedBookedData}

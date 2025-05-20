@@ -12,6 +12,12 @@ import TextArea from "antd/es/input/TextArea";
 import { IBooking } from "../../types/booking.type";
 import { useEffect } from "react";
 import dayjs, { Dayjs } from "dayjs";
+import {
+  CalendarOutlined,
+  UsergroupDeleteOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import styles from "./booking-info.module.scss";
 
 interface BookingInfoProps {
   data: IBooking;
@@ -79,6 +85,7 @@ const BookingInfo: React.FC<BookingInfoProps> = ({
   return (
     <div>
       <Form
+      style={{marginTop: '15px'}}
         form={form}
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 20 }}
@@ -87,54 +94,55 @@ const BookingInfo: React.FC<BookingInfoProps> = ({
         <Form.Item name="id" noStyle>
           <Input type="hidden" />
         </Form.Item>
-        <Form.Item
-          name="name"
-          label="Ім’я instagram"
-          rules={[{ required: true }]}
-        >
-          <Input />
+        <Form.Item name="name" rules={[{ required: true }]}>
+          <Input prefix={<UserOutlined />} />
         </Form.Item>
-        <Form.Item
-          name="guests"
-          label="Кількість відпочиваючих"
-          rules={[{ required: true }]}
-        >
-          <InputNumber min={1} />
-        </Form.Item>
-        <Form.Item
-          name="bookedDays"
-          label="Кількість днів"
-          rules={[{ required: true }]}
-        >
-          <InputNumber min={1} onChange={onChangeBookedDays} />
-        </Form.Item>
-
-        <Form.Item label="Період Бронювання" style={{ marginBottom: 0 }}>
+        <div className={styles["multi-control-container"]}>
+          <Form.Item
+            name="guests"
+            className={styles["multi-control-container--item"]}
+            rules={[{ required: true }]}
+          >
+            <InputNumber prefix={<UsergroupDeleteOutlined />} min={1} />
+          </Form.Item>
+          <Form.Item
+            name="bookedDays"
+            className={styles["multi-control-container--item"]}
+            rules={[{ required: true }]}
+          >
+            <InputNumber
+              prefix={<CalendarOutlined />}
+              min={1}
+              onChange={onChangeBookedDays}
+            />
+          </Form.Item>
+          <Form.Item
+            className={styles["multi-control-container--item"]}
+            name="prepaid"
+            valuePropName="checked"
+          >
+            <Checkbox>Оплачено</Checkbox>
+          </Form.Item>
+        </div>
+        <div className={styles["multi-control-container"]}>
           <Form.Item
             name="startDate"
-            style={{ display: "inline-block", width: "calc(50% - 8px)" }}
+            className={`${styles["multi-control-container--item"]}  ${styles["date-multi-control"]}`}
           >
             <DatePicker format="DD MMMM YYYY" placeholder="Заїзд" disabled />
           </Form.Item>
           <Form.Item
             name="endDate"
-            style={{
-              display: "inline-block",
-              width: "calc(50% - 8px)",
-              margin: "0 8px",
-            }}
+            className={`${styles["multi-control-container--item"]}  ${styles["date-multi-control"]}`}
           >
             <DatePicker format="DD MMMM YYYY" placeholder="Виїзд" disabled />
           </Form.Item>
-        </Form.Item>
+        </div>
 
-        <Form.Item name="note" label="Нотатки">
-          <TextArea rows={4} />
+        <Form.Item name="note">
+          <TextArea rows={2} />
         </Form.Item>
-        <Form.Item name="prepaid" valuePropName="checked" label="Передплата">
-          <Checkbox>Оплачено</Checkbox>
-        </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 20 }}>
+        <Form.Item wrapperCol={{ span: 20 }}>
           <Space>
             <Button type="primary" htmlType="button" onClick={onSave}>
               {data.id ? "Оновити" : "Створити"}

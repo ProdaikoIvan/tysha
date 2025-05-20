@@ -1,0 +1,11 @@
+.calendar-header {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &--selected-date {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
