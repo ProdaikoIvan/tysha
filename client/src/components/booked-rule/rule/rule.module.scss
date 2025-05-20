@@ -1,29 +1,8 @@
 @use "./../../../styles/variables.scss" as *;
 
-.container {
-  color: $text-color;
-  margin-top: 65px;
-
-  .price-description {
-    height: 100%;
-
-    &--content {
-      margin-top: 60px;
-    }
-
-    &--item {
-      margin-left: 10px;
-      margin-right: -12px;
-    }
-  }
-
-  .price-calendar {
-    margin-bottom: 20px;
-    &--content {
-      display: flex;
-      justify-content: center;
-    }
-  }
+.price-description {
+  height: 100%;
+  margin-left: 10px;
 }
 
 @include mobile {
