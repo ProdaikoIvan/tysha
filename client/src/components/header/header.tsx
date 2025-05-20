@@ -1,9 +1,17 @@
 import styles from "./header.module.scss";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import MobileMenuComponent from "./mobile-menu";
+import { HeaderAdaptor, IMenuItem } from "./header.adaptor";
+import MenuComponent from "./menu";
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuItems, setMenuItems] = useState<IMenuItem[]>(
+    HeaderAdaptor.getMenuItems()
+  );
+
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,34 +23,23 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header
-      className={`${styles["header"]} ${
-        scrolled && styles["header__scrolled"]
-      }`}
-    >
-      <div className={styles["header__container"]}>
-        <div className={styles["header__logo"]}>Tysha</div>
-        <div className={styles["navigation-container"]}>
-          <ul className={styles["navigation"]}>
-            <li className={styles["navigation__item"]}>
-              <a href="#photo">фото</a>
-            </li>
-            <li className={styles["navigation__item"]}>
-              <a href="#price">ціни</a>
-            </li>
-            <li className={styles["navigation__item"]}>
-              <a href="#about">про нас</a>
-            </li>
-            <li className={styles["navigation__item"]}>
-              <a href="#location">Локація</a>
-            </li>
-            <li className={styles["navigation__item"]}>
-              <a href="#contact">Контакти</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    <>
+      <header
+        className={`${styles["header"]} ${
+          scrolled && styles["header__scrolled"]
+        }`}
+      >
+        <MenuComponent
+          menuItems={menuItems}
+          toggleMenu={toggleMenu}
+        ></MenuComponent>
+      </header>
+      <MobileMenuComponent
+        menuItems={menuItems}
+        menuOpen={menuOpen}
+        toggleMenu={toggleMenu}
+      ></MobileMenuComponent>
+    </>
   );
 };
 

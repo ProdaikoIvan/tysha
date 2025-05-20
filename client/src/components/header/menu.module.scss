@@ -1,0 +1,78 @@
+@use './../../styles/variables.scss' as *;
+
+.header {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    text-transform: uppercase;
+  }
+
+  .navigation-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+  }
+
+  .navigation {
+    display: flex;
+
+    &__item {
+      cursor: pointer;
+      padding-left: 24px;
+      color: white;
+      text-transform: uppercase;
+      height: 18px;
+
+      &::after {
+        content: "";
+        width: 0px;
+        height: 1px;
+        display: block;
+        background: #999;
+        margin: 5px auto;
+        transition: width 0.1s;
+      }
+
+      &:hover {
+        &::after {
+          width: 40px;
+        }
+      }
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .burger {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+@include mobile {
+  .header {
+    .navigation-container {
+      display: none;
+    }
+
+    .burger {
+      display: block;
+    }
+  }
+}

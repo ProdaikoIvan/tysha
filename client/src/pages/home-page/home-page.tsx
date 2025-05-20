@@ -9,10 +9,10 @@ import { useEffect, useState } from "react";
 import { BookingCalendarAPI } from "../../services/booking-calendar/booking-calendar.api";
 import dayjs from "dayjs";
 import { IBookedDay } from "../../types/booking.type";
+import StartupComponent from "../../components/startup/startup";
 
 const HomePage: React.FC = () => {
   const [bookedDays, setBookedDays] = useState<IBookedDay[]>([]);
-  const [offsetY, setOffsetY] = useState(0);
 
   const loadBookedDates = async () => {
     const from = dayjs(new Date()).subtract(1, "month").startOf("month");
@@ -24,25 +24,13 @@ const HomePage: React.FC = () => {
     }
   };
 
-  const dynamicStyle = {
-    backgroundPositionY: `-${offsetY * 0.1}px`,
-  };
-
   useEffect(() => {
-    loadBookedDates();
-    const handleScroll = () => setOffsetY(window.pageYOffset);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // loadBookedDates();
   }, []);
   return (
     <div className={styles["container"]}>
       <Header></Header>
-      <div className={styles["sector1"]} style={dynamicStyle}>
-        <div className={styles["logo"]}>
-          <h1 className={styles["logo__title"]}>tysha</h1>
-          <p className={styles["logo__description"]}>місце вашого відпочинку</p>
-        </div>
-      </div>
+      <StartupComponent></StartupComponent>
       <section id="photo" className={styles["section"]}>
         <div className={styles["section__container"]}>
           <h3 className={styles["section__container--title"]}>Фото</h3>

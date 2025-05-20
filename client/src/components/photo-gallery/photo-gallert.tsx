@@ -36,10 +36,6 @@ const PhotoGallery: React.FC = () => {
     );
   }, []);
 
-  const handleOnClick = (props: ClickHandlerProps<IPhotoFiltered>): void => {
-    console.log(props);
-  };
-
   return (
     <>
       <ul className={styles["photo-filter"]}>
@@ -56,7 +52,10 @@ const PhotoGallery: React.FC = () => {
         ))}
       </ul>
       <RowsPhotoAlbum
-        targetRowHeight={400}
+        targetRowHeight={(containerWidth) => {
+          if (containerWidth < 768) return 200;
+          return 400;
+        }}
         spacing={10}
         onClick={({ index }) => setIndex(index)}
         photos={getFilteredImages()}

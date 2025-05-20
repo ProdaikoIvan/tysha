@@ -16,11 +16,7 @@ const LocationComponent: React.FC = () => {
             nostrum tempore veniam. Praesentium natus nihil quas veritatis
             porro, incidunt iure fuga quasi obcaecati cum eveniet atque
             quibusdam recusandae debitis corrupti sint non veniam eos doloribus
-            voluptates mollitia saepe repudiandae. Excepturi, doloribus ducimus.
-            Numquam fuga voluptatibus labore iusto libero voluptas adipisci,
-            quaerat vel error, deleniti perferendis eos eligendi blanditiis,
-            facere ratione nobis consequatur molestias odit ut pariatur. Tempora
-            sapiente quaerat mollitia architecto eum!
+            voluptates mollitia saepe repudiandae.
           </p>
         </Col>
         <Col className={styles["map-container"]} xs={24} lg={12}>

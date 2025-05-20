@@ -7,3 +7,9 @@ $error-bg-color: #fff2f0;
 $succes-border-color: #b7eb8f;
 $warning-border-color: #ffe58f;
 $error-border-color: #ffccc7;
+
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
