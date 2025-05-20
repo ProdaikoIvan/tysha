@@ -1,3 +1,5 @@
+@use './../../styles/variables.scss' as *;
+
 .container {
   .section {
     background: white;
@@ -12,7 +14,7 @@
       &--title {
         text-align: center;
         text-transform: uppercase;
-        color: #323232;
+        color: $text-color;
         font-size: 30px;
         margin-bottom: 20px;
         font-weight: 400;

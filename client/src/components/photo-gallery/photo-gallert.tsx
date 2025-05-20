@@ -53,8 +53,8 @@ const PhotoGallery: React.FC = () => {
       </ul>
       <RowsPhotoAlbum
         targetRowHeight={(containerWidth) => {
-          if (containerWidth < 768) return 200;
-          return 400;
+          if (containerWidth < 768) return 150;
+          return 350;
         }}
         spacing={10}
         onClick={({ index }) => setIndex(index)}

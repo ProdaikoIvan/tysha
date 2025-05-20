@@ -8,6 +8,8 @@ $succes-border-color: #b7eb8f;
 $warning-border-color: #ffe58f;
 $error-border-color: #ffccc7;
 
+$text-color: #323232;
+
 @mixin mobile {
   @media (max-width: 768px) {
     @content;

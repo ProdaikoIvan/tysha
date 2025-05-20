@@ -15,6 +15,8 @@ import PH13 from "../../assets/img/gallery/Ph-13.webp"
 import PH14 from "../../assets/img/gallery/Ph-14.webp"
 import PH15 from "../../assets/img/gallery/Ph-15.webp"
 import PH16 from "../../assets/img/gallery/Ph-16.webp"
+import PH17 from "../../assets/img/gallery/Ph-17.webp"
+import PH18 from "../../assets/img/gallery/Ph-18.webp"
 
 
 export type PhotoFilterType = 'house' | 'yard' | 'interior';
@@ -50,8 +52,8 @@ export const PhotoGalleryService = {
     return [
       {
         src: PH1,
-        width: 400,
-        height: 600,
+        width: 600,
+        height: 400,
         categoty: 'house'
       },
       {
@@ -82,12 +84,12 @@ export const PhotoGalleryService = {
         src: PH6,
         width: 400,
         height: 600,
-        categoty: 'yard'
+        categoty: 'house'
       },
       {
         src: PH7,
-        width: 400,
-        height: 600,
+        width: 600,
+        height: 400,
         categoty: 'yard'
       },
       {
@@ -112,18 +114,18 @@ export const PhotoGalleryService = {
         src: PH11,
         width: 400,
         height: 600,
-        categoty: 'interior'
+        categoty: 'yard'
       },
       {
         src: PH12,
-        width: 400,
-        height: 600,
-        categoty: 'interior'
+        width: 600,
+        height: 400,
+        categoty: 'yard'
       },
       {
         src: PH13,
-        width: 600,
-        height: 400,
+        width: 400,
+        height: 600,
         categoty: 'interior'
       },
       {
@@ -142,6 +144,18 @@ export const PhotoGalleryService = {
         src: PH16,
         width: 600,
         height: 400,
+        categoty: 'interior'
+      },
+      {
+        src: PH17,
+        width: 400,
+        height: 600,
+        categoty: 'interior'
+      },
+      {
+        src: PH18,
+        width: 400,
+        height: 600,
         categoty: 'interior'
       },
     ];

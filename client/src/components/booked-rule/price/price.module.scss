@@ -1,0 +1,26 @@
+@use "./../../../styles/variables.scss" as *;
+
+.price-container {
+  .price-title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .price-content {
+    font-size: 18px;
+    max-width: 350px;
+    margin: 0 auto 16px auto;
+    font-weight: 600;
+    position: relative;
+
+    .content-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+      color: rgba(0, 0, 0, 0.45);
+    }
+  }
+}

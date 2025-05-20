@@ -3,7 +3,7 @@ import PhotoGallery from "../../components/photo-gallery/photo-gallert";
 import Header from "./../../components/header/header";
 import LocationComponent from "../../components/location/location";
 import AboutComponent from "../../components/about/about";
-import PriceComponent from "../../components/price/price";
+import PriceComponent from "../../components/booked-rule/booked-rule";
 import ContactComponent from "../../components/contact/contact";
 import { useEffect, useState } from "react";
 import { BookingCalendarAPI } from "../../services/booking-calendar/booking-calendar.api";
@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
       <section id="price" className={styles["section"]}>
         <div className={styles["section__container"]}>
           <h3 className={styles["section__container--title"]}>Ціни</h3>
-          <PriceComponent bookedDays={bookedDays}></PriceComponent>
+          <PriceComponent></PriceComponent>
         </div>
       </section>
       <section id="about" className={styles["section"]}>
