@@ -28,15 +28,19 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const handleLoad = () => {
-      setIsLoaded(true);
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 300);
     };
 
-    window.addEventListener("load", handleLoad);
-
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
-    // loadBookedDates();
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => {
+        window.removeEventListener("load", handleLoad);
+      };
+    }
   }, []);
   return (
     <>
