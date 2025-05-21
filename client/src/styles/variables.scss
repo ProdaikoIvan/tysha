@@ -9,6 +9,7 @@ $warning-border-color: #ffe58f;
 $error-border-color: #ffccc7;
 
 $text-color: #323232;
+$text-color-2: rgba(0, 0, 0, 0.45);
 
 @mixin mobile {
   @media (max-width: 768px) {

@@ -15,6 +15,10 @@ export const HeaderAdaptor = {
         link: 'price'
       },
       {
+        title: 'зручності',
+        link: 'amenities'
+      },
+      {
         title: 'про нас',
         link: 'about'
       },

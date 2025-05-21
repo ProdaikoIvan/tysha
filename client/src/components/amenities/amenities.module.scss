@@ -1,0 +1,20 @@
+.amenities-container {
+  .amenities-title {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .amenities-content {
+    font-size: 18px;
+    margin: 0 auto 16px auto;
+    font-weight: 600;
+    position: relative;
+
+    .content-description {
+      height: 100%;
+      margin-left: 10px;
+    }
+  }
+}

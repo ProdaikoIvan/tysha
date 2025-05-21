@@ -1,6 +1,7 @@
 import { MenuOutlined } from "@ant-design/icons";
 import styles from "./menu.module.scss";
 import { IMenuItem } from "./header.adaptor";
+import { Link } from 'react-scroll'
 
 interface IMenuProps {
   menuItems: IMenuItem[];
@@ -14,13 +15,17 @@ const MenuComponent: React.FC<IMenuProps> = ({
   return (
     <>
       <div className={styles["header"]}>
-          <div className={styles["header__logo"]}>Tysha</div>
+          <div className={styles["header__logo"]}>
+            <Link to='startup' spy={true} smooth={true} duration={500}>Tysha</Link>
+            {/* <a href='#startup'>Tysha</a> */}
+            </div>
           <div className={styles["navigation-container"]}>
             <ul className={styles["navigation"]}>
               {menuItems.map((menuItem, index) => {
                 return (
                   <li key={index} className={styles["navigation__item"]}>
-                    <a href={`#${menuItem.link}`}>{menuItem.title}</a>
+                    <Link to={menuItem.link} spy={true} smooth={true} duration={500}>{menuItem.title}</Link>
+                    {/* <a href={`#${menuItem.link}`}>{menuItem.title}</a> */}
                   </li>
                 );
               })}

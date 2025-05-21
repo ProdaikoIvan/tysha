@@ -1,28 +1,30 @@
 import { Col, Row } from "antd";
 import styles from "./about.module.scss";
-import CardComponent from "../card/card";
 
 const AboutComponent: React.FC = () => {
-
   return (
     <div>
       <Row gutter={16} className={styles["container"]}>
-        <Col xs={24} lg={12}>
-          <CardComponent></CardComponent>
+        <Col className={styles["info-container"]} xs={24} lg={12}>
+          <p className={styles["info-container--text"]}>
+            Затишний будиночок у самому серці соснового лісу розташований у
+            місті Полтава для повноцінного відпочинку на природі.. Тут панує
+            тиша, свіже повітря та затишок — усе, що потрібно для повного
+            перезавантаження. На території: зелений доглянутий газон, купіль під
+            відкритим небом, мангал для вечірніх посиденьок і атмосфера
+            справжнього відпочинку. Це ідеальне місце для тих, хто мріє втекти
+            від міського шуму й зануритися в природу, не жертвуючи комфортом.
+          </p>
         </Col>
         <Col className={styles["info-container"]} xs={24} lg={12}>
           <p className={styles["info-container--text"]}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, et
-            veritatis, facere quae neque voluptatem beatae consectetur enim
-            autem exercitationem soluta ratione. Perspiciatis, dignissimos
-            animi! Magni dicta natus deleniti deserunt! Dolorum aliquam animi
-            aut delectus porro. Voluptate doloremque minus vitae beatae dolor
-            quaerat et dolorum ad iure labore rerum temporibus expedita nostrum
-            amet blanditiis, ipsam repellat fugiat fugit omnis quis. Earum quae
-            voluptatum nemo totam eos mollitia eveniet enim veniam alias at
-            impedit, adipisci exercitationem hic id, explicabo provident
-            voluptatem iure doloremque. Vitae eos aspernatur totam labore ea
-            atque consectetur!
+            Затишний будиночок у самому серці соснового лісу розташований у
+            місті Полтава для повноцінного відпочинку на природі.. Тут панує
+            тиша, свіже повітря та затишок — усе, що потрібно для повного
+            перезавантаження. На території: зелений доглянутий газон, купіль під
+            відкритим небом, мангал для вечірніх посиденьок і атмосфера
+            справжнього відпочинку. Це ідеальне місце для тих, хто мріє втекти
+            від міського шуму й зануритися в природу, не жертвуючи комфортом.
           </p>
         </Col>
       </Row>
