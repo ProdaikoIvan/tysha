@@ -10,9 +10,11 @@ import { BookingCalendarAPI } from "../../services/booking-calendar/booking-cale
 import dayjs from "dayjs";
 import { IBookedDay } from "../../types/booking.type";
 import StartupComponent from "../../components/startup/startup";
+import LoadingComponent from "../../components/loading/loading";
 
 const HomePage: React.FC = () => {
   const [bookedDays, setBookedDays] = useState<IBookedDay[]>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const loadBookedDates = async () => {
     const from = dayjs(new Date()).subtract(1, "month").startOf("month");
@@ -25,44 +27,58 @@ const HomePage: React.FC = () => {
   };
 
   useEffect(() => {
+    const handleLoad = () => {
+      setIsLoaded(true);
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
     // loadBookedDates();
   }, []);
   return (
-    <div className={styles["container"]}>
-      <Header></Header>
-      <StartupComponent></StartupComponent>
-      <section id="photo" className={styles["section"]}>
-        <div className={styles["section__container"]}>
-          <h3 className={styles["section__container--title"]}>Фото</h3>
-          <PhotoGallery></PhotoGallery>
-        </div>
-      </section>
+    <>
+      <LoadingComponent isVisible={!isLoaded}></LoadingComponent>
+      {isLoaded && (
+        <div className={styles["container"]}>
+          <Header></Header>
+          <StartupComponent></StartupComponent>
+          <section id="photo" className={styles["section"]}>
+            <div className={styles["section__container"]}>
+              <h3 className={styles["section__container--title"]}>Фото</h3>
+              <PhotoGallery></PhotoGallery>
+            </div>
+          </section>
 
-      <section id="price" className={styles["section"]}>
-        <div className={styles["section__container"]}>
-          <h3 className={styles["section__container--title"]}>Ціни</h3>
-          <PriceComponent></PriceComponent>
+          <section id="price" className={styles["section"]}>
+            <div className={styles["section__container"]}>
+              <h3 className={styles["section__container--title"]}>Ціни</h3>
+              <PriceComponent></PriceComponent>
+            </div>
+          </section>
+          <section id="about" className={styles["section"]}>
+            <div className={styles["section__container"]}>
+              <h3 className={styles["section__container--title"]}>Про нас</h3>
+              <AboutComponent></AboutComponent>
+            </div>
+          </section>
+          <section id="location" className={styles["section"]}>
+            <div className={styles["section__container"]}>
+              <h3 className={styles["section__container--title"]}>Локація</h3>
+              <LocationComponent></LocationComponent>
+            </div>
+          </section>
+          <section id="contact" className={styles["section"]}>
+            <div className={styles["section__container"]}>
+              <h3 className={styles["section__container--title"]}>Контакт</h3>
+              <ContactComponent></ContactComponent>
+            </div>
+          </section>
         </div>
-      </section>
-      <section id="about" className={styles["section"]}>
-        <div className={styles["section__container"]}>
-          <h3 className={styles["section__container--title"]}>Про нас</h3>
-          <AboutComponent></AboutComponent>
-        </div>
-      </section>
-      <section id="location" className={styles["section"]}>
-        <div className={styles["section__container"]}>
-          <h3 className={styles["section__container--title"]}>Локація</h3>
-          <LocationComponent></LocationComponent>
-        </div>
-      </section>
-      <section id="contact" className={styles["section"]}>
-        <div className={styles["section__container"]}>
-          <h3 className={styles["section__container--title"]}>Контакт</h3>
-          <ContactComponent></ContactComponent>
-        </div>
-      </section>
-    </div>
+      )}
+    </>
   );
 };
 

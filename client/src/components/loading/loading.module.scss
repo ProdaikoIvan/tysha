@@ -1,0 +1,107 @@
+@use "sass:math";
+@use "sass:list";
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+
+  &.fadeOut {
+    animation: fadeOutBackground 0.6s forwards;
+  }
+
+  $steps: 20;
+  $clip-values: (10, 30, 50, 70, 90, 20, 40, 60, 80, 100);
+
+  @function get-clip($index) {
+    $top: list.nth($clip-values, ($index % list.length($clip-values)) + 1);
+    $bottom: list.nth(
+      $clip-values,
+      (($index + 3) % list.length($clip-values)) + 1
+    );
+    @return rect(#{$top}px, 9999px, #{$bottom}px, 0);
+  }
+
+  @keyframes noise-anim {
+    @for $i from 0 through $steps {
+      #{math.percentage(math.div($i, $steps))} {
+        clip: get-clip($i);
+      }
+    }
+  }
+
+  @keyframes noise-anim-2 {
+    @for $i from 0 through $steps {
+      #{math.percentage(math.div($i, $steps))} {
+        clip: get-clip($i + 5);
+      }
+    }
+  }
+
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2);
+    }
+  }
+
+  @keyframes fadeOutBackground {
+    0% {
+      background: black;
+      opacity: 1;
+    }
+    100% {
+      background: transparent;
+      opacity: 0;
+    }
+  }
+
+  .loading {
+    color: white;
+    font-size: 100px;
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+
+    &.fadeOut {
+      animation: fadeOut 0.6s forwards;
+    }
+
+    &::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 2px;
+      top: 0;
+      color: white;
+      background: black;
+      text-shadow: -1px 0 red;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+      animation: noise-anim 2s infinite linear alternate-reverse;
+    }
+
+    &::before {
+      content: attr(data-text);
+      position: absolute;
+      left: -2px;
+      top: 0;
+      color: white;
+      background: black;
+      text-shadow: 1px 0 blue;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+      animation: noise-anim-2 3s infinite linear alternate-reverse;
+    }
+  }
+}
