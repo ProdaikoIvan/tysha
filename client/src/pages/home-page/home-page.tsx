@@ -28,7 +28,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     const handleLoad = () => {
-      // setIsLoaded(true);
+      setIsLoaded(true);
     };
 
     window.addEventListener("load", handleLoad);
