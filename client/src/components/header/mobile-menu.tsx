@@ -1,6 +1,7 @@
 import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
 import styles from "./mobile-menu.module.scss";
 import { IMenuItem } from "./header.adaptor";
+import { Link } from "react-scroll";
 
 interface MobileMenuProps {
   menuItems: IMenuItem[];
@@ -27,9 +28,10 @@ const MobileMenuComponent: React.FC<MobileMenuProps> = ({
           {menuItems.map((menuItem, index) => {
             return (
               <li key={index}>
-                <a href={`#${menuItem.link}`} onClick={toggleMenu}>
+                <Link to={menuItem.link} delay={500} spy={true} smooth={true} duration={500} onClick={toggleMenu}>{menuItem.title} </Link>
+                {/* <a href={`#${menuItem.link}`} onClick={toggleMenu}>
                   {menuItem.title}
-                </a>
+                </a> */}
               </li>
             );
           })}
