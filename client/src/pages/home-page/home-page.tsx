@@ -3,7 +3,6 @@ import PhotoGallery from "../../components/photo-gallery/photo-gallert";
 import Header from "./../../components/header/header";
 import LocationComponent from "../../components/location/location";
 import AboutComponent from "../../components/about/about";
-import PriceComponent from "../../components/booked-rule/booked-rule";
 import ContactComponent from "../../components/contact/contact";
 import { useEffect, useState } from "react";
 import { BookingCalendarAPI } from "../../services/booking-calendar/booking-calendar.api";
@@ -13,6 +12,7 @@ import StartupComponent from "../../components/startup/startup";
 import LoadingComponent from "../../components/loading/loading";
 import AmenitiesComponent from "../../components/amenities/amenities";
 import { Element } from "react-scroll";
+import PriceComponent from "../../components/price/price";
 
 const HomePage: React.FC = () => {
   const [bookedDays, setBookedDays] = useState<IBookedDay[]>([]);

@@ -1,7 +1,7 @@
-import styles from "./price.module.scss";
+import styles from "./price-details.module.scss";
 import "react-calendar/dist/Calendar.css";
 
-const PriceComponent: React.FC = () => {
+const PriceDetailsComponent: React.FC = () => {
   return (
     <div className={styles["price-container"]}>
       <h4 className={styles["price-title"]}>Пн, Вт, Ср, Чт</h4>
@@ -34,4 +34,4 @@ const PriceComponent: React.FC = () => {
   );
 };
 
-export default PriceComponent;
+export default PriceDetailsComponent;

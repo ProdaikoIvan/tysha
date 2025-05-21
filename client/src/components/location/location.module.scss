@@ -3,19 +3,48 @@
 
   .info-container {
     background: #323232;
-    padding: 20px;
+    padding: 24px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    height: 400px;
     justify-content: center;
-    &--text {
+
+    &__item {
       color: white;
-      font-size: 16px;
-      line-height: 1.5em;
+      font-size: 14px;
+      line-height: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+
+      &--icon {
+        font-size: 24px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .red {
+        color: #e52c2c
+      }
+
+      .green {
+        color: #4ec54e
+      }
+
+      .blue {
+        color: #39a2ff
+      }
+
+      &--text {
+        display: inline;
+      }
     }
   }
 
   .map-container {
-    height: 400px;
+    min-height: 400px;
   }
 }

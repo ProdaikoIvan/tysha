@@ -16,6 +16,10 @@
     color: white;
     text-transform: uppercase;
     cursor: pointer;
+
+    &--img {
+      width: 100px;
+    }
   }
 
   .navigation-container {
