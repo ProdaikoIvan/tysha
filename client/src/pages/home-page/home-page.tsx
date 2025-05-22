@@ -32,7 +32,7 @@ const HomePage: React.FC = () => {
     const handleLoad = () => {
       setTimeout(() => {
         setIsLoaded(true);
-      }, 300);
+      }, 500);
     };
 
     if (document.readyState === "complete") {
