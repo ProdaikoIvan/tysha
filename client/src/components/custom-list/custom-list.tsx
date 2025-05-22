@@ -15,7 +15,6 @@ const CustomListComponent: React.FC<ICustomListProps> = ({
   items,
   type = "dark",
 }) => {
-
   const getIconClassByType = (iconType?: CustomListItemIconType): string => {
     let classes = `${styles["list-container__item--icon"]}`;
 
@@ -27,12 +26,15 @@ const CustomListComponent: React.FC<ICustomListProps> = ({
         case CustomListItemIconType.INFO:
           classes = classes.concat(" ", `${styles["info"]}`);
           break;
+        case CustomListItemIconType.WARNING:
+          classes = classes.concat(" ", `${styles["warning"]}`);
+          break;
         case CustomListItemIconType.ERROR:
           classes = classes.concat(" ", `${styles["error"]}`);
           break;
       }
     }
-    
+
     return classes;
   };
 
