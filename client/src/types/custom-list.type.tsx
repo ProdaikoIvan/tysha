@@ -11,6 +11,7 @@ interface ICustomListItemIcon {
 export enum CustomListItemIconType {
     INFO = 'info',
     ERROR = 'error',
+    WARNING = 'warning',
     SUCCESS = 'success',
 }
 
