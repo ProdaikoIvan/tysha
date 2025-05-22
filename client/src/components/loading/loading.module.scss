@@ -76,9 +76,11 @@
   @keyframes fadeInBackground {
     0% {
       opacity: 0;
+      background: white;
     }
     100% {
       opacity: 1;
+      background: black;
     }
   }
 
