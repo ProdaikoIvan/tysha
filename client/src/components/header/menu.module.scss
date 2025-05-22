@@ -34,7 +34,6 @@
     &__item {
       cursor: pointer;
       padding-left: 24px;
-      color: white;
       text-transform: uppercase;
       height: 18px;
 
@@ -43,14 +42,19 @@
         width: 0px;
         height: 1px;
         display: block;
-        background: #999;
+        background: $green-color-base;
         margin: 5px auto;
-        transition: width 0.1s;
+        transition: width 0.2s;
       }
 
       &:hover {
         &::after {
           width: 40px;
+          
+        }
+        a {
+          color: $green-color-base;
+          transition: color 0.2s;
         }
       }
 

@@ -16,7 +16,7 @@ import PriceComponent from "../../components/price/price";
 
 const HomePage: React.FC = () => {
   const [bookedDays, setBookedDays] = useState<IBookedDay[]>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(true);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const loadBookedDates = async () => {
     const from = dayjs(new Date()).subtract(1, "month").startOf("month");

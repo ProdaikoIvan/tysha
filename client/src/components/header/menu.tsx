@@ -2,7 +2,7 @@ import { MenuOutlined } from "@ant-design/icons";
 import styles from "./menu.module.scss";
 import { IMenuItem } from "./header.adaptor";
 import { Link } from "react-scroll";
-import logo from "./../../assets/logo.png";
+import logo from "./../../assets/logo-light.png";
 
 interface IMenuProps {
   menuItems: IMenuItem[];

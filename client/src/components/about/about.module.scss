@@ -6,11 +6,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    &--text {
+
+    &__item {
       font-size: 16px;
       line-height: 1.5em;
       color: $text-color-2;
       font-weight: 600;
+
+      &--text {
+        background: transparent;
+      }
     }
   }
 }

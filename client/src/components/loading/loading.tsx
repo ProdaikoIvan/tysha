@@ -11,9 +11,9 @@ const LoadingComponent: React.FC<ILoadingProps> = ({ isVisible }) => {
 
   useEffect(() => {
     if (!isVisible && canHide) {
-      //setFadeOut(true);
-      //const timeout = setTimeout(() => setHidden(true), 600); // час fadeOut анімації
-      //return () => clearTimeout(timeout);
+      setFadeOut(true);
+      const timeout = setTimeout(() => setHidden(true), 1000); // час fadeOut анімації
+      return () => clearTimeout(timeout);
     }
   }, [canHide, isVisible]);
 
@@ -26,14 +26,11 @@ const LoadingComponent: React.FC<ILoadingProps> = ({ isVisible }) => {
 
   return (
     <div
-      className={`${styles["loading-container"]} ${fadeOut && styles.fadeOut}`}
-    >
+      className={`${styles["loading-container"]} ${fadeOut && styles["fadeOut"]}`}>
       <div
-        className={`${styles["loading"]} ${fadeOut && styles["fadeOut"]}`}
-        
-      >
+        className={`${styles["loading"]} ${fadeOut && styles["fadeOut"]}`}>
         <img className={styles["loading--img"]} src={logo} alt="logo" />
-        <div className={styles["loading--text"]} data-text="місце вашого відпочинку">місце вашого відпочинку</div>
+        <div className={styles["loading--text"]}>місце вашого відпочинку</div>
       </div>
     </div>
   );

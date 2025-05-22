@@ -12,36 +12,42 @@
   align-items: center;
   justify-content: center;
   z-index: 10000;
+  animation: fadeInBackground 0.4s ease-out forwards;
 
   &.fadeOut {
-    animation: fadeOutBackground 0.6s forwards;
+    animation: fadeOutBackground 1s forwards;
+    animation-delay: 0.4s;
   }
 
-  $steps: 20;
-  $clip-values: (10, 30, 50, 70, 90, 20, 40, 60, 80, 100);
+  .loading {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
 
-  @function get-clip($index) {
-    $top: list.nth($clip-values, ($index % list.length($clip-values)) + 1);
-    $bottom: list.nth(
-      $clip-values,
-      (($index + 3) % list.length($clip-values)) + 1
-    );
-    @return rect(#{$top}px, 9999px, #{$bottom}px, 0);
-  }
-
-  @keyframes noise-anim {
-    @for $i from 0 through $steps {
-      #{math.percentage(math.div($i, $steps))} {
-        clip: get-clip($i);
-      }
+    &--img {
+      margin: 0 auto;
+      width: 100%;
+      margin-bottom: 50px;
+      animation: logoScale 1s ease-out forwards;
+      animation-delay: 0.4s;
+      opacity: 0;
     }
-  }
 
-  @keyframes noise-anim-2 {
-    @for $i from 0 through $steps {
-      #{math.percentage(math.div($i, $steps))} {
-        clip: get-clip($i + 5);
-      }
+    &--text {
+      position: relative;
+      font-size: clamp(14px, 2.5vw, 58px);
+      text-transform: uppercase;
+      text-align: center;
+      opacity: 0;
+      animation: slideFromBottom 1s ease-out forwards;
+      animation-delay: 1.4s;
+    }
+
+    &.fadeOut {
+      animation: fadeOut 0.6s forwards;
     }
   }
 
@@ -67,56 +73,34 @@
     }
   }
 
-  .loading {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    &--img {
-      margin: 0 auto;
-      width: 50%;
-      margin-bottom: 50px;
+  @keyframes fadeInBackground {
+    0% {
+      opacity: 0;
     }
-
-    &--text {
-      position: relative;
-      color: white;
-      font-size: 18px;
-      text-transform: uppercase;
-      padding: 0 10px;
-
-      &::after {
-        content: attr(data-text);
-        position: absolute;
-        left: 2px;
-        font-size: 18px;
-        top: 0;
-        color: white;
-        background: black;
-        text-shadow: -1px 0 red;
-        overflow: hidden;
-        clip: rect(0, 900px, 0, 0);
-        animation: noise-anim 2s infinite linear alternate-reverse;
-      }
-
-      &::before {
-        content: attr(data-text);
-        position: absolute;
-        left: -2px;
-        font-size: 18px;
-        top: 0;
-        color: white;
-        background: black;
-        text-shadow: 1px 0 blue;
-        overflow: hidden;
-        clip: rect(0, 900px, 0, 0);
-        animation: noise-anim-2 3s infinite linear alternate-reverse;
-      }
+    100% {
+      opacity: 1;
     }
+  }
 
-    &.fadeOut {
-      animation: fadeOut 0.6s forwards;
+  @keyframes logoScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideFromBottom {
+    0% {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
