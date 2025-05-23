@@ -1,7 +1,10 @@
 .container {
-  height: 400px;
-  .column {
-    height: 100%;
+  min-height: 450px;
+
+  .calendar-container {
+    height: 400px;
+  }
+  .description-container {
     display: flex;
     justify-content: center;
     align-items: center;

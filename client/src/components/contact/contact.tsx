@@ -12,12 +12,12 @@ const ContactComponent: React.FC<IContactComponentProps> = ({ bookedDays }) => {
   return (
     <div>
       <Row gutter={32} className={styles["container"]}>
-        <Col className={styles["column"]} xs={24} lg={12}>
+        <Col className={styles["calendar-container"]} xs={24} lg={12}>
           <BookedCalendarComponent
             bookedDays={bookedDays}
           ></BookedCalendarComponent>
         </Col>
-        <Col className={styles["column"]} xs={24} lg={12}>
+        <Col className={styles["description-container"]} xs={24} lg={12}>
           <CustomListComponent
             items={ContactAdapterService.getItems()}
           ></CustomListComponent>

@@ -1,6 +1,7 @@
 @use './../../styles/variables.scss' as *;
 
 .footer-container {
-  height: 300px;
+  margin-top: 200px;
+  height: 200px;
   background-color: $bg-color-2;
 }

@@ -19,7 +19,10 @@ const BookedCalendarCellComponent: React.FC<
     const isBooked = (date: Dayjs) =>
       dayjs().isAfter(date, "day") || bookedSet.has(date.format("YYYY-MM-DD"));
 
-    const prevDay = date.subtract(1, "day");
+    if (isBooked(date)) { 
+       stylesList = stylesList.concat(" ", styles["full"]);
+    }
+    /* const prevDay = date.subtract(1, "day");
     const isPrevBooked = isBooked(prevDay);
     if (isBooked(date)) {
       if (isPrevBooked) {
@@ -31,7 +34,7 @@ const BookedCalendarCellComponent: React.FC<
       if (isPrevBooked) {
         stylesList = stylesList.concat(" ", styles["halfStart"]); // кінець
       }
-    }
+    } */
 
     return stylesList;
   };
