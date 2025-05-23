@@ -1,0 +1,16 @@
+@use './../../styles/variables.scss' as *;
+
+.calendar-container {
+  max-width: 400px;
+  margin: auto;
+
+  .calendar {
+    :global(.ant-picker-cell-in-view) {
+      color: $text-color;
+    };
+
+    :global(.ant-picker-cell) {
+      padding: 0;
+    }
+  }
+}

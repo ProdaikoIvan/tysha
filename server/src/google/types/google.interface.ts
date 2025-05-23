@@ -43,3 +43,10 @@ export interface IGoogleData {
 export interface IGoogleSheetData {
     sheets: IGoogleSheet[];   
 }
+
+export interface IMerge {
+  startColumnIndex: number;
+  startRowIndex: number;
+  endColumnIndex: number;
+  endRowIndex: number;
+}

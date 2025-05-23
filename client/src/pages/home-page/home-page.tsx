@@ -5,30 +5,27 @@ import LocationComponent from "../../components/location/location";
 import AboutComponent from "../../components/about/about";
 import ContactComponent from "../../components/contact/contact";
 import { useEffect, useState } from "react";
-import { BookingCalendarAPI } from "../../services/booking-calendar/booking-calendar.api";
-import dayjs from "dayjs";
-import { IBookedDay } from "../../types/booking.type";
 import StartupComponent from "../../components/startup/startup";
 import LoadingComponent from "../../components/loading/loading";
 import AmenitiesComponent from "../../components/amenities/amenities";
 import { Element } from "react-scroll";
 import PriceComponent from "../../components/price/price";
+import { GoogleAPI } from "../../services/google/google.api";
+import FooterComponent from "../../components/footer/footer";
 
 const HomePage: React.FC = () => {
-  const [bookedDays, setBookedDays] = useState<IBookedDay[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [bookedDays, setBookedDays] = useState<string[]>([]);
 
-  const loadBookedDates = async () => {
-    const from = dayjs(new Date()).subtract(1, "month").startOf("month");
-    const to = dayjs(new Date()).add(1, "month").endOf("month");
-    const dates = await BookingCalendarAPI.getBookedDays(from, to);
-
-    if (dates) {
-      setBookedDays(dates);
-    }
+  const loadBookedDays = async () => {
+    const bookedDays = await GoogleAPI.getBookedDays();
+    setBookedDays(bookedDays);
+    console.log(bookedDays);
   };
 
   useEffect(() => {
+    loadBookedDays();
+
     const handleLoad = () => {
       setTimeout(() => {
         setIsLoaded(true);
@@ -101,10 +98,11 @@ const HomePage: React.FC = () => {
             <section id="contacts" className={styles["section"]}>
               <div className={styles["section__container"]}>
                 <h3 className={styles["section__container--title"]}>Контакт</h3>
-                <ContactComponent></ContactComponent>
+                <ContactComponent bookedDays={bookedDays}></ContactComponent>
               </div>
             </section>
           </Element>
+          <FooterComponent></FooterComponent>
         </div>
       )}
     </>

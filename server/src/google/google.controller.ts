@@ -5,7 +5,7 @@ import { GoogleService } from './google.service';
 export class GoogleServiceController {
   constructor(private googleService: GoogleService) {}
 
-  @Get('sheet')
+  @Get('get-booked-days')
   getSheetData() {
     return this.googleService.fetchSheetData();
   }

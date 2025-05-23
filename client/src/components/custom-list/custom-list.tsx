@@ -49,7 +49,7 @@ const CustomListComponent: React.FC<ICustomListProps> = ({
         classes = classes.concat(" ", `${styles["light"]}`);
         break;
     }
-    console.log(classes);
+
     return classes;
   };
 

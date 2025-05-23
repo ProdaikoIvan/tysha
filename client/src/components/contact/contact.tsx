@@ -1,21 +1,28 @@
+import { Col, Row } from "antd";
+import BookedCalendarComponent from "../booked-calendar/booked-calendar";
 import styles from "./contact.module.scss";
+import CustomListComponent from "../custom-list/custom-list";
+import { ContactAdapterService } from "./contact.adapter";
 
-const ContactComponent: React.FC = () => {
+interface IContactComponentProps {
+  bookedDays: string[];
+}
 
+const ContactComponent: React.FC<IContactComponentProps> = ({ bookedDays }) => {
   return (
     <div>
-      <p className={styles["contact"]}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, et
-        veritatis, facere quae neque voluptatem beatae consectetur enim autem
-        exercitationem soluta ratione. Perspiciatis, dignissimos animi! Magni
-        dicta natus deleniti deserunt! Dolorum aliquam animi aut delectus porro.
-        Voluptate doloremque minus vitae beatae dolor quaerat et dolorum ad iure
-        labore rerum temporibus expedita nostrum amet blanditiis, ipsam repellat
-        fugiat fugit omnis quis. Earum quae voluptatum nemo totam eos mollitia
-        eveniet enim veniam alias at impedit, adipisci exercitationem hic id,
-        explicabo provident voluptatem iure doloremque. Vitae eos aspernatur
-        totam labore ea atque consectetur!
-      </p>
+      <Row gutter={32} className={styles["container"]}>
+        <Col className={styles["column"]} xs={24} lg={12}>
+          <BookedCalendarComponent
+            bookedDays={bookedDays}
+          ></BookedCalendarComponent>
+        </Col>
+        <Col className={styles["column"]} xs={24} lg={12}>
+          <CustomListComponent
+            items={ContactAdapterService.getItems()}
+          ></CustomListComponent>
+        </Col>
+      </Row>
     </div>
   );
 };
