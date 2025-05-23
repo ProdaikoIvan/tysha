@@ -63,7 +63,7 @@ const CustomListComponent: React.FC<ICustomListProps> = ({
                 {item.icon.icon}
               </p>
             )}
-            <p className={getTextClassByType()}>{item.text}</p>
+            <p className={getTextClassByType()} dangerouslySetInnerHTML={{ __html: item.text }}></p>
           </div>
         );
       })}

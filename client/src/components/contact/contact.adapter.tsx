@@ -1,4 +1,4 @@
-import { CustomListItemIconType, ICustomListItem } from "../../types/custom-list.type"
+import { ICustomListItem } from "../../types/custom-list.type"
 import InstagramIcon from '@mui/icons-material/Instagram';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
@@ -9,7 +9,7 @@ export const ContactAdapterService = {
         icon: {
           icon: <InstagramIcon />,
         },
-        text: ' Усі бронювання здійснюються через Instagram.'
+        text: ' Усі бронювання здійснюються через <a href="https://www.instagram.com/tysha.ua_/" target="_blank">Instagram.</a>'
       },
       {
         icon: {

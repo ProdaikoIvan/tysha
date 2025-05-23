@@ -8,5 +8,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    a {
+      color: #69b1ff;
+      &:hover {
+        color: #0958d9;
+      }
+    }
   }
 }
