@@ -15,7 +15,7 @@ export const ContactAdapterService = {
         icon: {
           icon: <QuestionAnswerIcon />,
         },
-        text: 'Напишіть нам у директ —  ми відповімо на всі ваші питання і допоможемо обрати дати.'
+        text: '<a href="https://www.instagram.com/tysha.ua_/" target="_blank">Напишіть нам у директ</a> —  ми відповімо на всі ваші питання і допоможемо обрати дати.'
       }
     ]
   },
