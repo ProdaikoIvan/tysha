@@ -21,7 +21,9 @@ const BookedCalendarComponent: React.FC<BookedCalendarComponentProps> = ({
   };
 
   const onPrevioust = () => {
-    setValue((prev) => prev.subtract(1, "month"));
+    if (dayjs().isBefore(value)) {
+      setValue((prev) => prev.subtract(1, "month"));
+    }
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -58,11 +60,11 @@ const BookedCalendarComponent: React.FC<BookedCalendarComponentProps> = ({
         value={value}
         className={styles["calendar"]}
         fullscreen={false}
-        headerRender={(props) => (
+        headerRender={() => (
           <BookedCalendarHeaderComponent
             onPrevious={onPrevioust}
             onNext={onNext}
-            date={props.value}
+            value={value}
           />
         )}
         fullCellRender={(date: Dayjs, info) => (

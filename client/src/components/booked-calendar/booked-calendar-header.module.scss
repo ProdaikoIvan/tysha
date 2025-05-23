@@ -15,8 +15,16 @@
     border-radius: 50%;
     transition: background-color 0.3s ease;
     margin: 10px;
-    font-size: 18x;
+    font-size: 18px;
     color: $text-color;
+
+    &.disabled {
+      cursor: not-allowed;
+       color: $text-color-2;
+      &:hover {
+        background-color: transparent;
+      }
+    }
 
     &:hover {
       background-color: $bg-color-1;
