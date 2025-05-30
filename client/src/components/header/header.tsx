@@ -15,7 +15,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -30,6 +30,7 @@ const Header: React.FC = () => {
         }`}
       >
         <MenuComponent
+          scrolled={scrolled}
           menuItems={menuItems}
           toggleMenu={toggleMenu}
         ></MenuComponent>

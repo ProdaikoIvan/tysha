@@ -20,7 +20,6 @@ const HomePage: React.FC = () => {
   const loadBookedDays = async () => {
     const bookedDays = await GoogleAPI.getBookedDays();
     setBookedDays(bookedDays);
-    console.log(bookedDays);
   };
 
   useEffect(() => {

@@ -19,7 +19,10 @@ const AboutComponent: React.FC = () => {
           </div>
         </Col>
         <Col className={styles["info-container"]} xs={24} lg={12}>
-          <CustomListComponent items={AboutAdapterService.getItems()} type="dark"></CustomListComponent>
+          <CustomListComponent
+            items={AboutAdapterService.getItems()}
+            type="dark"
+          ></CustomListComponent>
         </Col>
       </Row>
     </div>

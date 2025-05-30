@@ -1,37 +1,27 @@
+@use "./../../styles/variables.scss" as *;
+
 $booked-cell-color: rgba(255, 110, 110, 0.5);
 
 .cell-container {
   width: calc(100% - 0px); // або будь-яке інше значення (напр. 50%, 200px)
   aspect-ratio: 1 / 1;
   padding: 1px;
-.cell {
-  font-weight: bold;
-  font-size: 14px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-}
-.full {
-  background-color: $booked-cell-color;
-}
+  .cell {
+    font-weight: bold;
+    font-size: 14px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+  .full {
+    background-color: $booked-cell-color;
+  }
 
-.halfStart {
-  background: linear-gradient(
-    to bottom right,
-    $booked-cell-color 50%,
-    transparent 50%
-  );
+  .prev-date {
+    background-color: $booked-cell-color;
+    color: $text-color-2;
+  }
 }
-
-.halfEnd {
-  background: linear-gradient(
-    to top left,
-    $booked-cell-color 50%,
-    transparent 50%
-  );
-}
-}
-

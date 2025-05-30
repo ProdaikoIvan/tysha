@@ -7,7 +7,7 @@ interface IBookedCalendarHeaderComponentProps {
   onNext: () => void;
   onPrevious: () => void;
 }
-console.log(styles)
+
 const BookedCalendarHeaderComponent: React.FC<
   IBookedCalendarHeaderComponentProps
 > = ({ value, onNext, onPrevious }) => {

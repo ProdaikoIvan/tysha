@@ -5,17 +5,30 @@ import { Link } from "react-scroll";
 import logo from "./../../assets/logo-light.png";
 
 interface IMenuProps {
+  scrolled?: boolean;
   menuItems: IMenuItem[];
   toggleMenu: () => void;
 }
-
-const MenuComponent: React.FC<IMenuProps> = ({ menuItems, toggleMenu }) => {
+console.log(styles);
+const MenuComponent: React.FC<IMenuProps> = ({
+  menuItems,
+  scrolled,
+  toggleMenu,
+}) => {
   return (
     <>
-      <div className={styles["header"]}>
+      <div
+        className={`${styles["header"]} ${
+          scrolled && styles["header__scrolled"]
+        }`}
+      >
         <div className={styles["header__logo"]}>
           <Link to="startup" spy={true} smooth={true} duration={500}>
-            <img className={styles["header__logo--img"]} src={logo} alt="logo" />
+            <img
+              className={styles["header__logo--img"]}
+              src={logo}
+              alt="logo"
+            />
           </Link>
         </div>
         <div className={styles["navigation-container"]}>

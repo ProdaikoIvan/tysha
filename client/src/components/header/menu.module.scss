@@ -1,4 +1,4 @@
-@use './../../styles/variables.scss' as *;
+@use "./../../styles/variables.scss" as *;
 
 .header {
   width: 100%;
@@ -7,6 +7,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &__scrolled {
+    transition: 0.3s ease;
+    img {
+      transition: 0.3s ease;
+      width: 60px;
+    }
+  }
 
   &__logo {
     display: flex;
@@ -18,6 +26,7 @@
     cursor: pointer;
 
     &--img {
+      transition: 0.3s ease;
       width: 100px;
     }
   }
@@ -50,7 +59,6 @@
       &:hover {
         &::after {
           width: 40px;
-          
         }
         a {
           color: $green-color-base;
